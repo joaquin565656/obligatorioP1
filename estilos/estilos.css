@@ -79,3 +79,8 @@
     form button:active {
       transform: scale(0.98);
     }
+
+
+    .contenedor__seccionAdmin{
+      display: none;
+    }

@@ -3,6 +3,7 @@ class Sistema {
         this.listaDeUsuarios = [
             new Usuario("Joaquín", "Guerra", "joaco", "1234",0),
             new Usuario("123", "123", "jj", "1234",1)
+
         ]
         this.usuarioLogueado = null;
     }
@@ -33,14 +34,16 @@ class Sistema {
     }
     }
 
-    lista(){
+    obtenerUsuarios(){
         return this.listaDeUsuarios;
     }
 }
 
+let idUsuario = 0;
 class Usuario {
     constructor(nombre, apellido, email, password,rol) 
     {
+        this.id = idUsuario++;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
