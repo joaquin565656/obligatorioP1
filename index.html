@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obligatorio P1</title>
+
+    <link rel="stylesheet" href="estilos/estilos.css">
+    
 </head>
 <body>
     
+    <div class="contenedorLogin">
+        <h1>Iniciar Sesión</h1>
+        <form id="loginAdministrador">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" onclick="login()">Ingresar</button>
+        </form>
+
+    </div>
+
+    <script src="js/clases.js"></script>
+    <script src="js/code.js"></script>
 </body>
 </html>
