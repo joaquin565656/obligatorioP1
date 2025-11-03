@@ -12,13 +12,13 @@ class Sistema {
         this.usuarioLogueado = null;
     }
 
-    existeUsuario(user,pass){
+    existeUsuarioyContrasenia(user,pass){
     let clientes = this.listaDeClientes;
     let administradores = this.listaDeAdministradores;
     let usuarioEncontrado = null;
     for (let i = 0; i < clientes.length; i++) {
         let cliente = clientes[i];
-        if (cliente.nombreUsuario === user && cliente.password === pass) {
+        if (cliente.nombreUsuario.toLowerCase() === user.toLowerCase() && cliente.password === pass) {
             usuarioEncontrado = cliente;
             return 1; //Usuario tipo cliente
         }
@@ -26,7 +26,7 @@ class Sistema {
 
         for (let i = 0; i < administradores.length; i++) {
             let admin = administradores[i];
-            if (admin.nombreUsuario === user && admin.password === pass) {
+            if (admin.nombreUsuario.toLowerCase() === user.toLowerCase() && admin.password === pass) {
                 usuarioEncontrado = admin;
                 return 0; //Usuario tipo administrador
         }

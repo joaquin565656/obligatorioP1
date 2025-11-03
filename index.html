@@ -12,7 +12,7 @@
     
     <div class="seccion contenedorLogin" id="contenedorLogin">
         <h1>Iniciar Sesión</h1>
-        <form id="loginAdministrador">
+        <form id="login">
             <label for="username">Usuario:</label>
             <input type="text" id="username" required value="joaco">
 
@@ -21,6 +21,10 @@
 
             <button type="button" onclick="login()">Ingresar</button>
         </form>
+        <div class="contenedorBtnRegistrarse">
+            <label class="lblRegistrarse">¿No tienes una cuenta?</label>
+            <button type="button" onclick="mostrarSeccion('contenedorRegistro')" class="btnRegistrarse">Registrarse</button>
+        </div>
     </div>
 
     <div class="seccion contenedorRegistroCliente contenedorLogin" id="contenedorRegistro">
@@ -36,8 +40,12 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" required >
 
-            <button type="button" onclick="registrarCliente()">Ingresar</button>
+            <button type="button" onclick="registrarCliente()">Crear Cuenta</button>
         </form>
+        <div class="contenedorBtnRegistrarse">
+            <label class="lblRegistrarse">¿Ya tienes una cuenta?</label>
+            <button type="button" onclick="mostrarSeccion('contenedorLogin')" class="btnRegistrarse">Iniciar Sesión</button>
+        </div>
     </div>
 
     <div class="seccion contenedor__seccionAdmin" id="seccionAdmin">

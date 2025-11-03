@@ -14,7 +14,7 @@ function login() {
   let username = document.getElementById("username").value;
   let password = document.getElementById("password").value;
 
-  let usuario = sistema.existeUsuario(username, password);
+  let usuario = sistema.existeUsuarioyContrasenia(username, password);
   if(usuario == 0) {
     alert("Login exitoso como administrador");
     sistema.guardarUsuarioLogueado(username);
@@ -67,6 +67,7 @@ function registrarCliente() {
     }
     sistema.crearCliente(nombre, apellido, usuario, password);
     alert("Cliente registrado exitosamente");
+    mostrarSeccion("contenedorLogin");
     form.reset();
     
 }
