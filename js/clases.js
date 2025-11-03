@@ -36,13 +36,13 @@ class Sistema {
 
     obtenerUsuarioPorNombreUsuario(nombreUsuario){
         for (let cliente of this.listaDeClientes) {
-            if (cliente.nombreUsuario === nombreUsuario) {
+            if (cliente.nombreUsuario.toLowerCase() === nombreUsuario.toLowerCase()) {
                 return cliente;
             }
         }
 
         for (let admin of this.listaDeAdministradores) {
-            if (admin.nombreUsuario === nombreUsuario) {
+            if (admin.nombreUsuario.toLowerCase() === nombreUsuario.toLowerCase()) {
                 return admin;
             }
         }
