@@ -9,7 +9,11 @@
     
 </head>
 <body>
-    
+
+    <div class="contenedorPanelSuperior" id="contenedorPanelSuperior">
+           
+    </div>
+
     <div class="seccion contenedorLogin" id="contenedorLogin">
         <h1>Iniciar Sesión</h1>
         <form id="login">
@@ -69,8 +73,29 @@
     </div>
     <div class="seccion contenedor__seccionAdmin" id="seccionCliente">
         <h1>Panel de Cliente</h1>
-        
-       
+
+      <h2 class="titulo-conciertos">🎵 Lista de conciertos disponibles</h2>
+      <div class="contenedorBuscar">
+          <p><strong>Buscar</strong></p>
+          <input type="text" placeholder="Nombre del evento" id="inputBuscarConcierto" onkeyup="cargarConciertosDisponibles()">
+      </div>
+
+<div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
+ 
+    <!-- <div class="tarjeta" id="tarjetaConcierto">
+    <div class="imgconcierto">
+      <img src="./imagenes/ConciertoShakira.jpg" alt="Imagen del Concierto" class="img">
+    </div>
+
+    <div class="datosConcierto">
+      <h3 class="nombreConcierto">Concierto de Shakira</h3>
+      <p><strong>Artista:</strong> Shakira</p>
+      <p><strong>Precio:</strong> $1500</p>
+      <p><strong>Cupos disponibles:</strong> 120</p>
+      <button type="button" class="btnReservar">Reservar entrada</button>
+    </div>
+  </div> -->
+</div>
     </div>
 
     <script src="js/clases.js"></script>

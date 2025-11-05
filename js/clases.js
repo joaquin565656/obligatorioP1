@@ -1,6 +1,10 @@
 class Sistema {
     constructor(){
-        this.listaDeClientes = [
+       this.precargar();
+    }
+
+    precargar(){
+ this.listaDeClientes = [
             new Cliente("Joaquín", "Guerra", "joaco", "1234",10000),
             new Cliente("123", "123", "jj", "1234",10000)
 
@@ -10,6 +14,22 @@ class Sistema {
             new Administrador("administrador","admin123")
         ];
         this.usuarioLogueado = null;
+
+        this.listaDeConciertos = [
+            new Concierto("Concierto de Michael Jackson","Michael Jackson",120000,'Smooth Criminal','./imagenes/ConciertoMichaelJackson.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
+            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false)
+        ];
     }
 
     existeUsuarioyContrasenia(user,pass){
@@ -56,6 +76,9 @@ class Sistema {
         }       
         this.usuarioLogueado = usuario;
     }
+    obtenerUsuarioLogueado(){
+        return this.usuarioLogueado;
+    }
 
     obtenerClientes(){
         return this.listaDeClientes;
@@ -94,6 +117,20 @@ class Sistema {
         let nuevoCliente = new Cliente(nombre, apellido, nombreUsuario, password,10000);
         this.listaDeClientes.push(nuevoCliente);
     }
+
+    crearConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,oferta){
+        let nuevoConcierto = new Concierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,true,oferta);
+        this.listaDeConciertos.push(nuevoConcierto);
+    }
+
+    obtenerListaConciertosDisponibles(){
+        let lista = [];
+        for(let concierto of this.listaDeConciertos){
+        if(concierto.estado == true && concierto.cuposDisponibles>0)
+        lista.push(concierto)
+        }
+        return lista;
+    }
 }
 
 let idCliente = 1;
@@ -117,4 +154,23 @@ class Administrador {
         this.password = password;
 
     }
+
+}
+
+let idConcierto = 1;
+class Concierto {
+    
+    constructor(nombre,artista,precio,descripcion,imagen,cuposDisponibles,estado,oferta){
+        this.id = `CON_ID_${idConcierto++}`;
+        this.nombre = nombre;
+        this.artista = artista;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.cuposDisponibles = cuposDisponibles;
+        this.estado = estado;
+        this.oferta = oferta;
+
+    }
+
 }
