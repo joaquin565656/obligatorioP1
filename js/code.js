@@ -37,6 +37,7 @@ function login() {
     mostrarSeccion("seccionCliente");
     cargarConciertosDisponibles();
     llenarTablaClientes();
+
     
   } else {
     alert("Credenciales inválidas");
@@ -92,6 +93,8 @@ function obtenerListaConciertosFiltro(){
   let listaConciertos = sistema.obtenerListaConciertosDisponibles();
   let conciertos = [];
   let buscador = document.querySelector('#inputBuscarConcierto').value;
+  let soloOfertas = document.querySelector('#checkboxOfertas').checked;
+    
   if(buscador.length>0){
     for (let concierto of listaConciertos){   
       if(concierto.nombre.toUpperCase().indexOf(buscador.toUpperCase())!= -1){
@@ -109,16 +112,28 @@ function obtenerListaConciertosFiltro(){
   }else{
     conciertos = listaConciertos;
   }
+  // abrirModal(conciertos[0]);
+  if(soloOfertas){
+    let conciertosOfertas = [];
+    for(let concierto of conciertos){
+      if(concierto.oferta){
+        conciertosOfertas.push(concierto);
+      }
+    }
+    return conciertosOfertas;
+  }
   return conciertos;
 }
 function cargarConciertosDisponibles(){
   let conciertos = obtenerListaConciertosFiltro();
   document.querySelector('#contenedorConcierto').innerHTML ="";
   if(conciertos.length<=0)
-  document.querySelector('#contenedorConcierto').innerHTML =`<div clas="tarjeta"> No hay conciertos que coincidan con la búsqueda`;
+  document.querySelector('#contenedorConcierto').innerHTML =`<div> No hay conciertos que coincidan con la búsqueda`;
 
   for(let concierto of conciertos){
-    let mostrarConcierto =` <div class="tarjeta" id="tarjetaConcierto">
+    let mostrarConcierto =`
+    <div class="tarjeta">
+    ${concierto.oferta ? '<span class="badge-oferta"> En oferta</span>' : ''}
       <div class="imgconcierto">
         <img src="${concierto.imagen}" alt="Imagen del Concierto" class="img">
       </div>
@@ -128,10 +143,47 @@ function cargarConciertosDisponibles(){
         <p><strong>Artista:</strong> ${concierto.artista}</p>
         <p><strong>Precio:</strong> $${concierto.precio}</p>
         <p><strong>Cupos disponibles:</strong> ${concierto.cuposDisponibles}</p>
-        <button type="button" class="btnReservar">Reservar entrada</button>
+        <button class="btnReservar" onClick="abrirModal('${concierto.id}')">Reservar entrada</button>
       </div>
     </div>`
     document.querySelector('#contenedorConcierto').innerHTML += mostrarConcierto;
 
   }
+
+}
+
+let conciertoSeleccionado = null;
+
+function abrirModal(idConcierto) {
+  let concierto = sistema.buscarConciertoPorIde(idConcierto)
+  conciertoSeleccionado = concierto;
+
+  const modal = document.querySelector("#modalReserva");
+  document.querySelector("#modalNombreConcierto").innerText = concierto.nombre;
+  document.querySelector("#modalArtista").innerHTML = `<strong>Artista:</strong> ${concierto.artista}`;
+  document.querySelector("#modalPrecio").innerHTML = `<strong>Precio:</strong> $${concierto.precio}`;
+  document.querySelector("#modalCupos").innerHTML = `<strong>Cupos disponibles:</strong> ${concierto.cuposDisponibles}`;
+  document.querySelector("#modalImagenConcierto").src = concierto.imagen;
+
+  modal.style.display = "flex";
+}
+
+function cerrarModal() {
+  document.querySelector("#modalReserva").style.display = "none";
+}
+
+function confirmarReserva() {
+  const cantidad = parseInt(document.querySelector("#cantidadEntradas").value);
+  if(sistema.existeReservaClienteLogueado(conciertoSeleccionado))
+    return alert("Ya tiene una reserva realizada para este concierto");
+  if (cantidad <= 0 ) {
+    alert("Cantidad no puede ser menor a 0.");
+    return;
+  }
+  sistema.crearReserva(sistema.obtenerUsuarioLogueado(),conciertoSeleccionado,cantidad,cantidad*conciertoSeleccionado.precio,sistema.obtenerEstadosReserva()[0]);
+
+  
+  alert(`✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`);
+  cerrarModal();
+  cargarConciertosDisponibles(); // actualiza la lista
 }

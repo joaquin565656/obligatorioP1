@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obligatorio P1</title>
 
     <link rel="stylesheet" href="estilos/estilos.css">
-    
+
 </head>
+
 <body>
 
     <div class="contenedorPanelSuperior" id="contenedorPanelSuperior">
-           
+
     </div>
 
     <div class="seccion contenedorLogin" id="contenedorLogin">
@@ -27,7 +29,8 @@
         </form>
         <div class="contenedorBtnRegistrarse">
             <label class="lblRegistrarse">¿No tienes una cuenta?</label>
-            <button type="button" onclick="mostrarSeccion('contenedorRegistro')" class="btnRegistrarse">Registrarse</button>
+            <button type="button" onclick="mostrarSeccion('contenedorRegistro')"
+                class="btnRegistrarse">Registrarse</button>
         </div>
     </div>
 
@@ -37,24 +40,25 @@
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" required>
             <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" required >
+            <input type="text" id="apellido" required>
             <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" required >
+            <input type="text" id="usuario" required>
 
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" required >
+            <input type="password" id="password" required>
 
             <button type="button" onclick="registrarCliente()">Crear Cuenta</button>
         </form>
         <div class="contenedorBtnRegistrarse">
             <label class="lblRegistrarse">¿Ya tienes una cuenta?</label>
-            <button type="button" onclick="mostrarSeccion('contenedorLogin')" class="btnRegistrarse">Iniciar Sesión</button>
+            <button type="button" onclick="mostrarSeccion('contenedorLogin')" class="btnRegistrarse">Iniciar
+                Sesión</button>
         </div>
     </div>
 
     <div class="seccion contenedor__seccionAdmin" id="seccionAdmin">
         <h1>Panel de Administración</h1>
-        
+
         <div class="listaUsuarios">
             <h2>Lista de Usuarios</h2>
             <table>
@@ -66,7 +70,7 @@
                     </tr>
                 </thead>
                 <tbody id="tablaClientes">
-                    
+
                 </tbody>
             </table>
         </div>
@@ -74,31 +78,66 @@
     <div class="seccion contenedor__seccionAdmin" id="seccionCliente">
         <h1>Panel de Cliente</h1>
 
-      <h2 class="titulo-conciertos">🎵 Lista de conciertos disponibles</h2>
-      <div class="contenedorBuscar">
-          <p><strong>Buscar</strong></p>
-          <input type="text" placeholder="Nombre del evento" id="inputBuscarConcierto" onkeyup="cargarConciertosDisponibles()">
+        <h2 class="titulo-conciertos">🎵 Lista de conciertos disponibles</h2>
+        <div class="contenedorBuscar">
+            <p><strong>Buscar</strong></p>
+            <input type="text" placeholder="Nombre del evento" id="inputBuscarConcierto"
+                onkeyup="cargarConciertosDisponibles()">
+                    <label for="checkboxOfertas">Solo ofertas</label>
+                    <input type="checkbox" id="checkboxOfertas" onchange="cargarConciertosDisponibles()">
+        </div>
+
+        <div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
+            <!-- <div class="tarjeta" id="tarjetaConcierto">
+                <span class="badge-oferta"> En oferta</span>
+                <div class="imgconcierto">
+                <img src="./imagenes/ConciertoShakira.jpg" alt="Imagen del Concierto" class="img">
+                </div>
+
+                <div class="datosConcierto">
+                <h3 class="nombreConcierto">Concierto de Shakira</h3>
+                <p><strong>Artista:</strong> Shakira</p>
+                <p><strong>Precio:</strong> $1500</p>
+                <p><strong>Cupos disponibles:</strong> 120</p>
+                <button type="button" class="btnReservar">Reservar entrada</button>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- POPUP RESERVA -->
+<!-- POPUP RESERVA -->
+<div class="modalReserva" id="modalReserva">
+  <div class="modal__contenido">
+    <button class="modal__cerrar" onclick="cerrarModal()">×</button>
+
+    <div class="modal__body">
+      <div class="modal__imagen">
+        <img id="modalImagenConcierto" src="" alt="Imagen del concierto" />
       </div>
 
-<div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
- 
-    <!-- <div class="tarjeta" id="tarjetaConcierto">
-    <div class="imgconcierto">
-      <img src="./imagenes/ConciertoShakira.jpg" alt="Imagen del Concierto" class="img">
-    </div>
+      <div class="modal__info">
+        <h2 id="modalNombreConcierto">Concierto</h2>
+        <p id="modalArtista"><strong>Artista:</strong> </p>
+        <p id="modalPrecio"><strong>Precio:</strong> </p>
+        <p id="modalCupos"><strong>Cupos disponibles:</strong> </p>
 
-    <div class="datosConcierto">
-      <h3 class="nombreConcierto">Concierto de Shakira</h3>
-      <p><strong>Artista:</strong> Shakira</p>
-      <p><strong>Precio:</strong> $1500</p>
-      <p><strong>Cupos disponibles:</strong> 120</p>
-      <button type="button" class="btnReservar">Reservar entrada</button>
+        <label for="cantidadEntradas"><strong>Cantidad de entradas:</strong></label>
+        <input type="number" id="cantidadEntradas" min="1" value="1" />
+
+        <div class="modal__acciones">
+          <button class="btnCancelar" onclick="cerrarModal()">Cancelar</button>
+          <button class="btnConfirmar" onclick="confirmarReserva()">Confirmar</button>
+        </div>
+      </div>
     </div>
-  </div> -->
+  </div>
 </div>
+
+
     </div>
 
     <script src="js/clases.js"></script>
     <script src="js/code.js"></script>
 </body>
+
 </html>

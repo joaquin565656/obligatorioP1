@@ -18,18 +18,19 @@ class Sistema {
         this.listaDeConciertos = [
             new Concierto("Concierto de Michael Jackson","Michael Jackson",120000,'Smooth Criminal','./imagenes/ConciertoMichaelJackson.jpg',100,true,false),
             new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false)
+            new Concierto("Concierto de Metallica","Metallica",15000,'Metallica WorldWired Tour','./imagenes/ConciertoMetallica.png',100,true,true),
+            new Concierto("Concierto de ACDC","ACDC",15000,'ACDC Gira','./imagenes/ConciertoACDC.png',100,true,true),
+            new Concierto("Concierto de Bad Bunny","Bad Bunny",8000,'Bad Bunny Live','./imagenes/ConciertoBadBunny.png',100,true,false),
+            new Concierto("Concierto de Taylor Swift","Taylor Swift",20000,'The Eras Tour','./imagenes/ConciertoTaylorSwift.png',100,true,true)
         ];
+
+        this.listaEstadosReserva = [
+            new EstadoReserva("Pendiente", true),
+            new EstadoReserva("Confirmada", true),
+            new EstadoReserva("Cancelada", true)
+        ];
+
+        this.listaReservas = [];
     }
 
     existeUsuarioyContrasenia(user,pass){
@@ -131,6 +132,46 @@ class Sistema {
         }
         return lista;
     }
+
+    buscarConciertoPorIde(id){
+        let conciertos = this.obtenerListaConciertosDisponibles();
+        for(let concierto of conciertos){
+            if(concierto.id == id)
+                return concierto;
+        }
+        return undefined;
+    }
+
+    crearReserva(cliente,concierto,cantidadEntradas,totalAPagar,estado){
+        let nuevaReserva = new Reserva(cliente,concierto,cantidadEntradas,totalAPagar,estado,new Date().toLocaleDateString());
+        this.listaReservas.push(nuevaReserva);
+    }
+    cambiarEstadoReserva(reserva, nuevoEstado){
+        reserva.estado = nuevoEstado;
+    }
+
+    obtenerReservasTotal(){
+        return this.listaReservas;
+    }
+
+    existeReservaClienteLogueado(concierto){
+        for(let reserva of this.listaReservas){
+            if(reserva.cliente.id == this.usuarioLogueado.id && reserva.concierto.id == concierto.id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    obtenerEstadosReserva(){
+        let estados = [];
+        for(let estado of this.listaEstadosReserva){
+            if(estado.activo == true){
+                estados.push(estado);
+            }
+        }
+        return estados;
+    }
 }
 
 let idCliente = 1;
@@ -173,4 +214,26 @@ class Concierto {
 
     }
 
+}
+
+let estadoReserva = 1;
+class EstadoReserva {
+    constructor(nombre,activo){
+        this.id = estadoReserva++;
+        this.nombre = nombre;
+        this.activo = activo;
+    }
+}
+
+let idReserva = 1;
+class Reserva {
+    constructor(cliente,concierto,cantidadEntradas,totalAPagar,estado,fecha){
+        this.id = `RES_ID_${idReserva++}`;
+        this.cliente = cliente;
+        this.concierto = concierto;
+        this.cantidadEntradas = cantidadEntradas;
+        this.totalAPagar = totalAPagar;
+        this.estado = estado; //obj estado reserva
+        this.fecha = fecha;
+    }
 }
