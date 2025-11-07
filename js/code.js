@@ -3,12 +3,16 @@ let sistema = new Sistema();
 window.addEventListener('load',inicio);
 
 function inicio(){ 
-  login();
+  // login();
 
 }
 function cerrarSesion(){
+  sistema.cerrarSesion();
+  mostrarSeccion('contenedorLogin');
+     document.querySelector("#contenedorPanelSuperior").style.display ="none";
 
 }
+
 function mostrarSeccion(idSeccion){
     const secciones = document.querySelectorAll(".seccion");
     for(let seccion of secciones) 
@@ -29,6 +33,7 @@ function login() {
     sistema.guardarUsuarioLogueado(username);
     mostrarSeccion("seccionAdmin");
     llenarTablaClientes();
+    document.querySelector("#contenedorPanelSuperior").style.display = "flex";
     return;
   }
   if (usuario == 1) {
@@ -37,6 +42,8 @@ function login() {
     mostrarSeccion("seccionCliente");
     cargarConciertosDisponibles();
     llenarTablaClientes();
+    cargarReservasRealizadas();
+    document.querySelector("#contenedorPanelSuperior").style.display ="flex";
 
     
   } else {
@@ -45,7 +52,7 @@ function login() {
   }
 
   let usuarioLogueado = sistema.obtenerUsuarioLogueado();
-  let contenedorPanelSuperior = `<strong>Usuario: ${usuarioLogueado.nombre}</strong>
+  let contenedorPanelSuperior = `<b>Usuario: ${usuarioLogueado.nombre}</b>
   <button type="button" onclick="cerrarSesion()" class="btnCerrarSesion">Cerrar Sesión</button>`
   document.querySelector('#contenedorPanelSuperior').innerHTML = contenedorPanelSuperior;
 }
@@ -112,7 +119,7 @@ function obtenerListaConciertosFiltro(){
   }else{
     conciertos = listaConciertos;
   }
-  // abrirModal(conciertos[0]);
+  // abrirPopUpReserva(conciertos[0]);
   if(soloOfertas){
     let conciertosOfertas = [];
     for(let concierto of conciertos){
@@ -123,6 +130,21 @@ function obtenerListaConciertosFiltro(){
     return conciertosOfertas;
   }
   return conciertos;
+}
+function cargarReservasRealizadas(){
+  let reservas = sistema.obtenerReservasTotal();
+  let trReserva = "";
+  for(let reserva of reservas){
+    trReserva += `
+            <tr>
+                <td>${reserva.id}</td>
+                <td>${reserva.fecha}</td>
+                <td>${reserva.concierto.nombre}</td>
+                <td>${reserva.cantidadEntradas}</td>
+                <td>${reserva.estado.nombre}</td>
+            </tr>`
+  }
+  document.querySelector("#tablaReservas").innerHTML = trReserva;
 }
 function cargarConciertosDisponibles(){
   let conciertos = obtenerListaConciertosFiltro();
@@ -140,36 +162,35 @@ function cargarConciertosDisponibles(){
   
       <div class="datosConcierto">
         <h3 class="nombreConcierto">${concierto.nombre}</h3>
-        <p><strong>Artista:</strong> ${concierto.artista}</p>
-        <p><strong>Precio:</strong> $${concierto.precio}</p>
-        <p><strong>Cupos disponibles:</strong> ${concierto.cuposDisponibles}</p>
-        <button class="btnReservar" onClick="abrirModal('${concierto.id}')">Reservar entrada</button>
+        <p><b>Artista:</b> ${concierto.artista}</p>
+        <p><b>Precio:</b> $${concierto.precio}</p>
+        <p><b>Cupos disponibles:</b> ${concierto.cuposDisponibles}</p>
+        <button class="btnReservar" onClick="abrirPopUpReserva('${concierto.id}')">Reservar entrada</button>
       </div>
     </div>`
     document.querySelector('#contenedorConcierto').innerHTML += mostrarConcierto;
 
   }
-
 }
 
 let conciertoSeleccionado = null;
 
-function abrirModal(idConcierto) {
-  let concierto = sistema.buscarConciertoPorIde(idConcierto)
+function abrirPopUpReserva(idConcierto) {
+  let concierto = sistema.buscarConciertoPorId(idConcierto)
   conciertoSeleccionado = concierto;
 
-  const modal = document.querySelector("#modalReserva");
-  document.querySelector("#modalNombreConcierto").innerText = concierto.nombre;
-  document.querySelector("#modalArtista").innerHTML = `<strong>Artista:</strong> ${concierto.artista}`;
-  document.querySelector("#modalPrecio").innerHTML = `<strong>Precio:</strong> $${concierto.precio}`;
-  document.querySelector("#modalCupos").innerHTML = `<strong>Cupos disponibles:</strong> ${concierto.cuposDisponibles}`;
-  document.querySelector("#modalImagenConcierto").src = concierto.imagen;
+  const PopUpReserva = document.querySelector("#PopUpReservaReserva");
+  document.querySelector("#PopUpReservaNombreConcierto").innerText = concierto.nombre;
+  document.querySelector("#PopUpReservaArtista").innerHTML = `<b>Artista:</b> ${concierto.artista}`;
+  document.querySelector("#PopUpReservaPrecio").innerHTML = `<b>Precio:</b> $${concierto.precio}`;
+  document.querySelector("#PopUpReservaCupos").innerHTML = `<b>Cupos disponibles:</b> ${concierto.cuposDisponibles}`;
+  document.querySelector("#PopUpReservaImagenConcierto").src = concierto.imagen;
 
-  modal.style.display = "flex";
+  PopUpReserva.style.display = "flex";
 }
 
-function cerrarModal() {
-  document.querySelector("#modalReserva").style.display = "none";
+function cerrarPopUpReserva() {
+  document.querySelector("#PopUpReservaReserva").style.display = "none";
 }
 
 function confirmarReserva() {
@@ -180,10 +201,10 @@ function confirmarReserva() {
     alert("Cantidad no puede ser menor a 0.");
     return;
   }
-  sistema.crearReserva(sistema.obtenerUsuarioLogueado(),conciertoSeleccionado,cantidad,cantidad*conciertoSeleccionado.precio,sistema.obtenerEstadosReserva()[0]);
-
+  sistema.crearReserva(sistema.obtenerUsuarioLogueado(),conciertoSeleccionado,cantidad,cantidad*conciertoSeleccionado.precio);
+  cargarReservasRealizadas();
   
   alert(`✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`);
-  cerrarModal();
+  cerrarPopUpReserva();
   cargarConciertosDisponibles(); // actualiza la lista
 }

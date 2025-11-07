@@ -1,38 +1,39 @@
 class Sistema {
     constructor(){
-       this.precargar();
+        
+        this.listaDeClientes = [];
+        this.listaDeAdministradores = [];
+        this.listaDeConciertos = [];
+        this.listaEstadosReserva = [];
+        this.listaReservas = [];
+        this.usuarioLogueado = null;
+        this.precargar();
     }
 
     precargar(){
- this.listaDeClientes = [
-            new Cliente("Joaquín", "Guerra", "joaco", "1234",10000),
-            new Cliente("123", "123", "jj", "1234",10000)
+            
+        this.listaDeClientes.push(new Cliente("Joaquín", "Guerra", "joaco", "1234",10000))
+        this.listaDeClientes.push(new Cliente("123", "123", "jj", "1234",10000))
 
-        ]
-        this.listaDeAdministradores = [
-            new Administrador("admin","1234"),
-            new Administrador("administrador","admin123")
-        ];
-        this.usuarioLogueado = null;
+        
+        this.listaDeAdministradores.push(new Administrador("admin","1234"));
+        this.listaDeAdministradores.push(new Administrador("administrador","admin123"));
 
-        this.listaDeConciertos = [
-            new Concierto("Concierto de Michael Jackson","Michael Jackson",120000,'Smooth Criminal','./imagenes/ConciertoMichaelJackson.jpg',100,true,false),
-            new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false),
-            new Concierto("Concierto de Metallica","Metallica",15000,'Metallica WorldWired Tour','./imagenes/ConciertoMetallica.png',100,true,true),
-            new Concierto("Concierto de ACDC","ACDC",15000,'ACDC Gira','./imagenes/ConciertoACDC.png',100,true,true),
-            new Concierto("Concierto de Bad Bunny","Bad Bunny",8000,'Bad Bunny Live','./imagenes/ConciertoBadBunny.png',100,true,false),
-            new Concierto("Concierto de Taylor Swift","Taylor Swift",20000,'The Eras Tour','./imagenes/ConciertoTaylorSwift.png',100,true,true)
-        ];
+        this.listaDeConciertos.push(new Concierto("Concierto de Michael Jackson","Michael Jackson",120000,'Smooth Criminal','./imagenes/ConciertoMichaelJackson.jpg',100,true,false));
+        this.listaDeConciertos.push(new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false));
+        this.listaDeConciertos.push(new Concierto("Concierto de Metallica","Metallica",15000,'Metallica WorldWired Tour','./imagenes/ConciertoMetallica.png',100,true,true));
+        this.listaDeConciertos.push(new Concierto("Concierto de ACDC","ACDC",15000,'ACDC Gira','./imagenes/ConciertoACDC.png',100,true,true));
+        this.listaDeConciertos.push(new Concierto("Concierto de Bad Bunny","Bad Bunny",8000,'Bad Bunny Live','./imagenes/ConciertoBadBunny.png',100,true,false));
+        this.listaDeConciertos.push(new Concierto("Concierto de Taylor Swift","Taylor Swift",20000,'The Eras Tour','./imagenes/ConciertoTaylorSwift.png',100,true,true));
 
-        this.listaEstadosReserva = [
-            new EstadoReserva("Pendiente", true),
-            new EstadoReserva("Confirmada", true),
-            new EstadoReserva("Cancelada", true)
-        ];
-
-        this.listaReservas = [];
+        this.listaEstadosReserva.push(new EstadoReserva("Pendiente", true));
+        this.listaEstadosReserva.push(new EstadoReserva("Confirmada", true));
+        this.listaEstadosReserva.push(new EstadoReserva("Cancelada", true));
     }
 
+    cerrarSesion(){
+        this.usuarioLogueado = null;
+    }
     existeUsuarioyContrasenia(user,pass){
     let clientes = this.listaDeClientes;
     let administradores = this.listaDeAdministradores;
@@ -133,7 +134,7 @@ class Sistema {
         return lista;
     }
 
-    buscarConciertoPorIde(id){
+    buscarConciertoPorId(id){
         let conciertos = this.obtenerListaConciertosDisponibles();
         for(let concierto of conciertos){
             if(concierto.id == id)
@@ -143,7 +144,7 @@ class Sistema {
     }
 
     crearReserva(cliente,concierto,cantidadEntradas,totalAPagar,estado){
-        let nuevaReserva = new Reserva(cliente,concierto,cantidadEntradas,totalAPagar,estado,new Date().toLocaleDateString());
+        let nuevaReserva = new Reserva(cliente,concierto,cantidadEntradas,totalAPagar,this.obtenerEstadosReserva()[0],new Date().toLocaleDateString());
         this.listaReservas.push(nuevaReserva);
     }
     cambiarEstadoReserva(reserva, nuevoEstado){

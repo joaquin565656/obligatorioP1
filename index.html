@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body id="body">
 
     <div class="contenedorPanelSuperior" id="contenedorPanelSuperior">
 
@@ -76,66 +76,87 @@
         </div>
     </div>
     <div class="seccion contenedor__seccionAdmin" id="seccionCliente">
-        <h1>Panel de Cliente</h1>
+        <!-- <h1>Panel de Cliente</h1> -->
 
-        <h2 class="titulo-conciertos">🎵 Lista de conciertos disponibles</h2>
-        <div class="contenedorBuscar">
-            <p><strong>Buscar</strong></p>
-            <input type="text" placeholder="Nombre del evento" id="inputBuscarConcierto"
-                onkeyup="cargarConciertosDisponibles()">
-                    <label for="checkboxOfertas">Solo ofertas</label>
-                    <input type="checkbox" id="checkboxOfertas" onchange="cargarConciertosDisponibles()">
+        <div class="contenedorConciertos">
+
+        
+            <h2 class="titulo-conciertos">🎵 Lista de conciertos disponibles</h2>
+            <div class="contenedorBuscar">
+                <p><strong>Buscar</strong></p>
+                <input type="text" placeholder="Nombre del evento" id="inputBuscarConcierto"
+                    onkeyup="cargarConciertosDisponibles()">
+                        <label for="checkboxOfertas">Solo ofertas</label>
+                        <input class="chkOfertas" type="checkbox" id="checkboxOfertas" onchange="cargarConciertosDisponibles()">
+            </div>
+
+            <div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
+                <!-- <div class="tarjeta" id="tarjetaConcierto">
+                    <span class="badge-oferta"> En oferta</span>
+                    <div class="imgconcierto">
+                    <img src="./imagenes/ConciertoShakira.jpg" alt="Imagen del Concierto" class="img">
+                    </div>
+
+                    <div class="datosConcierto">
+                    <h3 class="nombreConcierto">Concierto de Shakira</h3>
+                    <p><strong>Artista:</strong> Shakira</p>
+                    <p><strong>Precio:</strong> $1500</p>
+                    <p><strong>Cupos disponibles:</strong> 120</p>
+                    <button type="button" class="btnReservar">Reservar entrada</button>
+                    </div>
+                </div> -->
+            </div>
         </div>
 
-        <div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
-            <!-- <div class="tarjeta" id="tarjetaConcierto">
-                <span class="badge-oferta"> En oferta</span>
-                <div class="imgconcierto">
-                <img src="./imagenes/ConciertoShakira.jpg" alt="Imagen del Concierto" class="img">
-                </div>
+        <div class="contenedorHistorialReservas">
+            <h2>Reservas Realizadas</h2>
 
-                <div class="datosConcierto">
-                <h3 class="nombreConcierto">Concierto de Shakira</h3>
-                <p><strong>Artista:</strong> Shakira</p>
-                <p><strong>Precio:</strong> $1500</p>
-                <p><strong>Cupos disponibles:</strong> 120</p>
-                <button type="button" class="btnReservar">Reservar entrada</button>
-                </div>
-            </div> -->
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Concierto</th>
+                    <th>Cantidad Entradas</th>
+                    <th>Estado</th>
+                </thead>
+                <tbody id="tablaReservas">
+                    
+                </tbody>
+            </table>
         </div>
 
-        <!-- POPUP RESERVA -->
+
+
+    </div>
+
+    
 <!-- POPUP RESERVA -->
-<div class="modalReserva" id="modalReserva">
-  <div class="modal__contenido">
-    <button class="modal__cerrar" onclick="cerrarModal()">×</button>
+<div class="PopUpReservaReserva" id="PopUpReservaReserva">
+  <div class="PopUpReserva__contenido">
+    <button class="PopUpReserva__cerrar" onclick="cerrarPopUpReserva()">×</button>
 
-    <div class="modal__body">
-      <div class="modal__imagen">
-        <img id="modalImagenConcierto" src="" alt="Imagen del concierto" />
+    <div class="PopUpReserva__body">
+      <div class="PopUpReserva__imagen">
+        <img id="PopUpReservaImagenConcierto" src="" alt="Imagen del concierto" />
       </div>
 
-      <div class="modal__info">
-        <h2 id="modalNombreConcierto">Concierto</h2>
-        <p id="modalArtista"><strong>Artista:</strong> </p>
-        <p id="modalPrecio"><strong>Precio:</strong> </p>
-        <p id="modalCupos"><strong>Cupos disponibles:</strong> </p>
+      <div class="PopUpReserva__info">
+        <h2 id="PopUpReservaNombreConcierto">Concierto</h2>
+        <p id="PopUpReservaArtista"><strong>Artista:</strong> </p>
+        <p id="PopUpReservaPrecio"><strong>Precio:</strong> </p>
+        <p id="PopUpReservaCupos"><strong>Cupos disponibles:</strong> </p>
 
         <label for="cantidadEntradas"><strong>Cantidad de entradas:</strong></label>
         <input type="number" id="cantidadEntradas" min="1" value="1" />
 
-        <div class="modal__acciones">
-          <button class="btnCancelar" onclick="cerrarModal()">Cancelar</button>
+        <div class="PopUpReserva__acciones">
+          <button class="btnCancelar" onclick="cerrarPopUpReserva()">Cancelar</button>
           <button class="btnConfirmar" onclick="confirmarReserva()">Confirmar</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-    </div>
-
     <script src="js/clases.js"></script>
     <script src="js/code.js"></script>
 </body>

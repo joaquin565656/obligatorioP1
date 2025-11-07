@@ -10,13 +10,16 @@
     }
 
     .contenedorPanelSuperior{
+      position: absolute;
       padding: 1rem;
       display: flex;
       gap:1rem;
       width: max-content;
       align-items: center;
       margin-left: auto;
-      margin-bottom: auto;
+      top: 1rem;
+      right: 1rem;
+      display: none;
     }
 
     .btnCerrarSesion{
@@ -217,16 +220,22 @@
 .contenedorBuscar{
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-bottom: 1.5rem;
   gap: 0.6rem;
 }
 .contenedorBuscar input{
-  width: 300px;
+  /* width: 300px; */
   padding: 0.5rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.2s ease;
+}
+.chkOfertas{
+  display: flex;
+  width: 2rem;
+  height: 2rem;
 }
 
 .tarjeta {
@@ -257,8 +266,8 @@
 
 
 
-/* FONDO DEL MODAL */
-.modalReserva {
+/* FONDO DEL PopUpReserva */
+.PopUpReservaReserva {
   display: none;
   position: fixed;
   top: 0;
@@ -272,8 +281,8 @@
   backdrop-filter: blur(3px);
 }
 
-/* CONTENIDO DEL MODAL */
-.modal__contenido {
+/* CONTENIDO DEL PopUpReserva */
+.PopUpReserva__contenido {
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -281,10 +290,10 @@
   max-width: 650px;
   width: 90%;
   position: relative;
-  animation: fadeInModal 0.25s ease-out;
+  animation: fadeInPopUpReserva 0.25s ease-out;
 }
 
-@keyframes fadeInModal {
+@keyframes fadeInPopUpReserva {
   from {
     opacity: 0;
     transform: scale(0.95);
@@ -296,7 +305,7 @@
 }
 
 /* BOTÓN DE CIERRE */
-.modal__cerrar {
+.PopUpReserva__cerrar {
   display: flex;
   width: max-content;
   justify-self: flex-end;
@@ -308,14 +317,14 @@
   padding: 0rem;
 }
 
-/* CUERPO DEL MODAL */
-.modal__body {
+/* CUERPO DEL PopUpReserva */
+.PopUpReserva__body {
   display: flex;
   gap: 1.5rem;
   align-items: flex-start;
 }
 
-.modal__imagen img {
+.PopUpReserva__imagen img {
   width: 200px;
   height: 260px;
   object-fit: cover;
@@ -323,24 +332,24 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.modal__info {
+.PopUpReserva__info {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.modal__info h2 {
+.PopUpReserva__info h2 {
   margin: 0;
   color: #1e3a8a;
 }
 
-.modal__info p {
+.PopUpReserva__info p {
   margin: 0.2rem 0;
   color: #374151;
 }
 
-.modal__info input[type="number"] {
+.PopUpReserva__info input[type="number"] {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #d1d5db;
@@ -349,7 +358,7 @@
 }
 
 /* ACCIONES */
-.modal__acciones {
+.PopUpReserva__acciones {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
