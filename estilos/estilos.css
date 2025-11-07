@@ -131,16 +131,18 @@
     .contenedor__seccionAdmin,
     .contenedorRegistroCliente{
       display: none;
-      margin: 1rem
+      margin: 1rem;
+      width: 100%;
       /* overflow: visible; */
     }
 
 /* Cliente */
 .titulo-conciertos {
-  text-align: center;
+  text-align: start;
   margin-bottom: 2rem;
   font-size: 1.8rem;
   color: #1e293b;
+  margin-left: 1rem;
 }
 
 .contenedor__tarjetasConciertos {
@@ -219,10 +221,11 @@
 }
 .contenedorBuscar{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 1.5rem;
   gap: 0.6rem;
+  margin-left: 1rem;
 }
 .contenedorBuscar input{
   /* width: 300px; */
@@ -386,4 +389,100 @@
 
 .btnConfirmar:hover {
   background-color: #1d4ed8;
+}
+
+
+/* ----- Estilos tabla ----- */
+.contenedorHistorialReservas {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.contenedorHistorialReservas h2 {
+    color: #333;
+    margin-bottom: 15px;
+    position: absolute;
+    left: 2rem;
+}
+
+.contenedorTituloReservaResumen{
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+.contenedorResumenReserva{
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+}
+
+thead th {
+    padding: 12px;
+    font-weight: normal;
+    font-size: 14px;
+    border-right: 1px solid #0069d9;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #f1f5ff;
+}
+
+tbody td {
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #444;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.btnCancelarReserva{
+  display: flex;
+  width: max-content;
+  background-color: red;
+
+}
+/* Estado visual */
+td.estado-pendiente {
+    color: #f0ad4e;
+    font-weight: bold;
+}
+
+td.estado-aprobada {
+    color: #28a745;
+    font-weight: bold;
+}
+
+td.estado-cancelada {
+    color: #dc3545;
+    font-weight: bold;
 }

@@ -7,6 +7,7 @@ class Sistema {
         this.listaEstadosReserva = [];
         this.listaReservas = [];
         this.usuarioLogueado = null;
+        this.resumenCliente = []
         this.precargar();
     }
 
@@ -27,8 +28,15 @@ class Sistema {
         this.listaDeConciertos.push(new Concierto("Concierto de Taylor Swift","Taylor Swift",20000,'The Eras Tour','./imagenes/ConciertoTaylorSwift.png',100,true,true));
 
         this.listaEstadosReserva.push(new EstadoReserva("Pendiente", true));
-        this.listaEstadosReserva.push(new EstadoReserva("Confirmada", true));
+        this.listaEstadosReserva.push(new EstadoReserva("Aprobada", true));
         this.listaEstadosReserva.push(new EstadoReserva("Cancelada", true));
+
+        
+        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[0],6,12000,this.listaEstadosReserva[0],'07/11/2025'));
+        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[1],6,12000,this.listaEstadosReserva[1],'07/11/2025'));
+        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],6,12000,this.listaEstadosReserva[2],'07/11/2025'));
+        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],6,12000,this.listaEstadosReserva[1],'07/11/2025'));
+        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],6,12000,this.listaEstadosReserva[0],'07/11/2025'));
     }
 
     cerrarSesion(){
@@ -82,10 +90,32 @@ class Sistema {
         return this.usuarioLogueado;
     }
 
+
     obtenerClientes(){
         return this.listaDeClientes;
     }
 
+    obtenerResumenCliente(){
+        let cliente = this.obtenerUsuarioLogueado();
+        let aprobadas = 0;
+        let canceladas = 0;
+        let pendientes = 0;
+        let saldo = cliente.saldo;
+        let reservas = this.listaReservas
+        for(let reserva of reservas){
+            if(reserva.cliente == cliente){
+                console.log(reserva);
+                if(reserva.estado.id == 1)
+                    pendientes++;
+                if(reserva.estado.id == 2)
+                    aprobadas++
+                if(reserva.estado.id == 3)
+                    canceladas++;
+            }
+        }
+        let resumen = new ResumenCliente(cliente,aprobadas,canceladas,pendientes,saldo);
+        return resumen;
+    }
     comprobarContrasenia(contrasenia){
         if(contrasenia.length < 5){
             alert("La contraseña debe tener al menos 5 caracteres.");
@@ -143,7 +173,7 @@ class Sistema {
         return undefined;
     }
 
-    crearReserva(cliente,concierto,cantidadEntradas,totalAPagar,estado){
+    crearReserva(cliente,concierto,cantidadEntradas,totalAPagar){
         let nuevaReserva = new Reserva(cliente,concierto,cantidadEntradas,totalAPagar,this.obtenerEstadosReserva()[0],new Date().toLocaleDateString());
         this.listaReservas.push(nuevaReserva);
     }
@@ -155,6 +185,23 @@ class Sistema {
         return this.listaReservas;
     }
 
+    obtenerReservaPorID(idReserva){
+        let reservas = this.obtenerReservasTotal();
+        for(let reserva of reservas){
+            if(reserva.id == idReserva)
+                return reserva;
+        }
+    }
+    cancelarReserva(idReserva){
+        let reservas = this.obtenerReservasTotal();
+        let reserva = this.obtenerReservaPorID(idReserva);
+        for(let res of reservas){            
+            if(res == reserva){
+                res.estado = this.listaEstadosReserva[2];
+            }
+        }
+
+    }
     existeReservaClienteLogueado(concierto){
         for(let reserva of this.listaReservas){
             if(reserva.cliente.id == this.usuarioLogueado.id && reserva.concierto.id == concierto.id){
@@ -236,5 +283,15 @@ class Reserva {
         this.totalAPagar = totalAPagar;
         this.estado = estado; //obj estado reserva
         this.fecha = fecha;
+    }
+}
+
+class ResumenCliente {
+    constructor(cliente,reservasAprobadas,reservasCanceladas,reservasPendientes,saldo){
+        this.cliente = cliente;
+        this.reservasAprobadas = reservasAprobadas;
+        this.reservasCanceladas = reservasCanceladas;
+        this.reservasPendientes = reservasPendientes;
+        this.saldo = saldo;
     }
 }

@@ -3,7 +3,7 @@ let sistema = new Sistema();
 window.addEventListener('load',inicio);
 
 function inicio(){ 
-  // login();
+  login();
 
 }
 function cerrarSesion(){
@@ -31,19 +31,13 @@ function login() {
   if(usuario == 0) {
     // alert("Login exitoso como administrador");
     sistema.guardarUsuarioLogueado(username);
-    mostrarSeccion("seccionAdmin");
-    llenarTablaClientes();
-    document.querySelector("#contenedorPanelSuperior").style.display = "flex";
+   iniciarAdmin();
     return;
   }
   if (usuario == 1) {
     // alert("Login exitoso como cliente");
     sistema.guardarUsuarioLogueado(username);
-    mostrarSeccion("seccionCliente");
-    cargarConciertosDisponibles();
-    llenarTablaClientes();
-    cargarReservasRealizadas();
-    document.querySelector("#contenedorPanelSuperior").style.display ="flex";
+   iniciarCliente();
 
     
   } else {
@@ -55,8 +49,34 @@ function login() {
   let contenedorPanelSuperior = `<b>Usuario: ${usuarioLogueado.nombre}</b>
   <button type="button" onclick="cerrarSesion()" class="btnCerrarSesion">Cerrar Sesión</button>`
   document.querySelector('#contenedorPanelSuperior').innerHTML = contenedorPanelSuperior;
+  }
+
+  function iniciarAdmin(){
+    mostrarSeccion("seccionAdmin");
+    llenarTablaClientes();
+    document.querySelector("#contenedorPanelSuperior").style.display = "flex";
+  }
+
+function iniciarCliente(){
+    mostrarSeccion("seccionCliente");
+    cargarConciertosDisponibles();
+    llenarTablaClientes();
+    cargarReservasRealizadas();
+    document.querySelector("#contenedorPanelSuperior").style.display ="flex";
+    llenarResumenCliente();
 }
 
+function llenarResumenCliente(){
+  let resumen = sistema.obtenerResumenCliente();
+  document.querySelector("#contenedorResumenReserva").innerHTML = `
+      <b>Saldo:${resumen.saldo}</b>
+      <b>Aprobadas:${resumen.reservasAprobadas}</b>
+      <b>Canceladas:${resumen.reservasCanceladas}</b>
+      <b>Pendientes:${resumen.reservasPendientes}</b>
+  `
+  
+   
+}
 function llenarTablaClientes() {
   let tablaClientes = document.getElementById("tablaClientes");
   let clientes = sistema.obtenerClientes();
@@ -76,7 +96,6 @@ function llenarTablaClientes() {
 function registrarCliente() {
   let form = document.querySelector("#registroCliente");
   if (!form.reportValidity()) {
-    console.log("Formulario no válido");
     return;
   }
   let nombre = form.nombre.value;
@@ -131,17 +150,37 @@ function obtenerListaConciertosFiltro(){
   }
   return conciertos;
 }
+
+function cancelarReserva(idReserva){
+  sistema.cancelarReserva(idReserva)
+  iniciarCliente();
+}
 function cargarReservasRealizadas(){
   let reservas = sistema.obtenerReservasTotal();
   let trReserva = "";
+  let trEstado = "";
   for(let reserva of reservas){
+    let trCancelar = "<td></td>";
+    if(reserva.estado.id == 1){
+      trCancelar = `<td><button type="button" class="btnCancelarReserva" onClick="cancelarReserva('${reserva.id}')">Cancelar</button> </td>`;
+      trEstado = `<td class="estado-pendiente">${reserva.estado.nombre}</td>`
+    }else if (reserva.estado.id == 2){
+    trEstado = `<td class="estado-aprobada">${reserva.estado.nombre}</td>`
+    }else if (reserva.estado.id == 3){
+    trEstado = `<td class="estado-cancelada">${reserva.estado.nombre}</td>`
+    }
+      
     trReserva += `
             <tr>
                 <td>${reserva.id}</td>
                 <td>${reserva.fecha}</td>
                 <td>${reserva.concierto.nombre}</td>
                 <td>${reserva.cantidadEntradas}</td>
-                <td>${reserva.estado.nombre}</td>
+                <td>${reserva.totalAPagar}</td>
+                ${trEstado}
+                ${trCancelar}
+                
+                
             </tr>`
   }
   document.querySelector("#tablaReservas").innerHTML = trReserva;
@@ -202,9 +241,9 @@ function confirmarReserva() {
     return;
   }
   sistema.crearReserva(sistema.obtenerUsuarioLogueado(),conciertoSeleccionado,cantidad,cantidad*conciertoSeleccionado.precio);
-  cargarReservasRealizadas();
+  iniciarCliente()
   
   alert(`✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`);
   cerrarPopUpReserva();
-  cargarConciertosDisponibles(); // actualiza la lista
+  // cargarConciertosDisponibles(); // actualiza la lista
 }
