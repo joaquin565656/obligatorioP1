@@ -486,3 +486,10 @@ td.estado-cancelada {
     color: #dc3545;
     font-weight: bold;
 }
+
+/* Al pasar el mouse */
+tbody tr:hover {
+  background-color: #d6d6d6; /* tono más oscuro */
+  cursor: pointer;           /* cambia el cursor */
+}
+

@@ -1,11 +1,16 @@
 let sistema = new Sistema();
+let alerta = new Alertas();
 
 window.addEventListener('load',inicio);
 
-function inicio(){ 
+async function inicio(){ 
   login();
 
+  
 }
+
+
+
 function cerrarSesion(){
   sistema.cerrarSesion();
   mostrarSeccion('contenedorLogin');
@@ -151,12 +156,16 @@ function obtenerListaConciertosFiltro(){
   return conciertos;
 }
 
-function cancelarReserva(idReserva){
-  sistema.cancelarReserva(idReserva)
-  iniciarCliente();
+async function cancelarReserva(idReserva){
+  const cancelar = await alerta.confirmacion('Cancelar Reserva',`¿Seguro que desea cancelar la reserva ${idReserva}?`,'warning','Si','No',true) 
+  if(cancelar){
+
+    sistema.cancelarReserva(idReserva)
+    iniciarCliente();
+  }
 }
 function cargarReservasRealizadas(){
-  let reservas = sistema.obtenerReservasTotal();
+  let reservas = sistema.obtenerReservasTotalPorClienteLogueado();
   let trReserva = "";
   let trEstado = "";
   for(let reserva of reservas){
@@ -179,10 +188,34 @@ function cargarReservasRealizadas(){
                 <td>${reserva.totalAPagar}</td>
                 ${trEstado}
                 ${trCancelar}
-                
-                
             </tr>`
   }
+let resumen = sistema.obtenerResumenCliente();
+  trReserva += 
+  `
+  <tr>
+                <td colSpan="7" style="background-color:#e0e0e0; font-weight:bold; text-align:center;">Resumen:</td>
+  </tr>
+
+  <tr>
+                <td></td>
+                <td></td>
+                <td>Monto total reservas aprobadas</td>
+                <td>----</td>
+                <td>${sistema.obtenerMontoTotalReservasAprobadasCliente()}</td>
+                <td></td>
+                <td></td>
+    </tr>
+  <tr>
+                <td></td>
+                <td></td>
+                <td>Saldo disponible</td>
+                <td>----</td>
+                <td>${resumen.saldo}</td>
+                <td></td>
+                <td></td>
+    </tr>
+  `
   document.querySelector("#tablaReservas").innerHTML = trReserva;
 }
 function cargarConciertosDisponibles(){
@@ -203,6 +236,7 @@ function cargarConciertosDisponibles(){
         <h3 class="nombreConcierto">${concierto.nombre}</h3>
         <p><b>Artista:</b> ${concierto.artista}</p>
         <p><b>Precio:</b> $${concierto.precio}</p>
+        <p><b>Descripción:</b> ${concierto.descripcion}</p>
         <p><b>Cupos disponibles:</b> ${concierto.cuposDisponibles}</p>
         <button class="btnReservar" onClick="abrirPopUpReserva('${concierto.id}')">Reservar entrada</button>
       </div>

@@ -181,19 +181,25 @@ class Sistema {
         reserva.estado = nuevoEstado;
     }
 
-    obtenerReservasTotal(){
-        return this.listaReservas;
+    obtenerReservasTotalPorClienteLogueado(){
+        let reservas = [];
+        for(let reserva of this.listaReservas){
+            if(reserva.cliente == this.usuarioLogueado){
+                reservas.push(reserva);
+            }
+        }
+        return reservas;
     }
 
     obtenerReservaPorID(idReserva){
-        let reservas = this.obtenerReservasTotal();
+        let reservas = this.obtenerReservasTotalPorClienteLogueado();
         for(let reserva of reservas){
             if(reserva.id == idReserva)
                 return reserva;
         }
     }
     cancelarReserva(idReserva){
-        let reservas = this.obtenerReservasTotal();
+        let reservas = this.obtenerReservasTotalPorClienteLogueado();
         let reserva = this.obtenerReservaPorID(idReserva);
         for(let res of reservas){            
             if(res == reserva){
@@ -219,6 +225,17 @@ class Sistema {
             }
         }
         return estados;
+    }
+
+    obtenerMontoTotalReservasAprobadasCliente(){
+        let monto = 0;
+        for(let reserva of this.listaReservas){
+            if(reserva.cliente == this.usuarioLogueado && reserva.estado.id == 2){
+                monto += reserva.totalAPagar;
+            }
+        }
+        return monto;
+
     }
 }
 
