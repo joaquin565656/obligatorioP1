@@ -4,9 +4,7 @@ let alerta = new Alertas();
 window.addEventListener('load',inicio);
 
 async function inicio(){ 
-  login();
-
-  
+  login(); 
 }
 
 
@@ -36,10 +34,9 @@ function login() {
   if(usuario == 0) {
     // alert("Login exitoso como administrador");
     sistema.guardarUsuarioLogueado(username);
-   iniciarAdmin();
-    return;
+    iniciarAdmin();
   }
-  if (usuario == 1) {
+  else if (usuario == 1) {
     // alert("Login exitoso como cliente");
     sistema.guardarUsuarioLogueado(username);
    iniciarCliente();
@@ -51,21 +48,16 @@ function login() {
   }
 
   let usuarioLogueado = sistema.obtenerUsuarioLogueado();
+  console.log(usuarioLogueado);
+  
   let contenedorPanelSuperior = `<b>Usuario: ${usuarioLogueado.nombre}</b>
   <button type="button" onclick="cerrarSesion()" class="btnCerrarSesion">Cerrar Sesión</button>`
   document.querySelector('#contenedorPanelSuperior').innerHTML = contenedorPanelSuperior;
   }
 
-  function iniciarAdmin(){
-    mostrarSeccion("seccionAdmin");
-    llenarTablaClientes();
-    document.querySelector("#contenedorPanelSuperior").style.display = "flex";
-  }
-
 function iniciarCliente(){
     mostrarSeccion("seccionCliente");
     cargarConciertosDisponibles();
-    llenarTablaClientes();
     cargarReservasRealizadas();
     document.querySelector("#contenedorPanelSuperior").style.display ="flex";
     llenarResumenCliente();
@@ -79,23 +71,6 @@ function llenarResumenCliente(){
       <b>Canceladas:${resumen.reservasCanceladas}</b>
       <b>Pendientes:${resumen.reservasPendientes}</b>
   `
-  
-   
-}
-function llenarTablaClientes() {
-  let tablaClientes = document.getElementById("tablaClientes");
-  let clientes = sistema.obtenerClientes();
-  let filas = "";
-  for (let cliente of clientes) {
-    filas += `
-                <tr>
-                    <td>${cliente.id}</td>
-                    <td>${cliente.nombre}</td>
-                    <td>${cliente.apellido}</td>
-                </tr>
-            `;
-  }
-  tablaClientes.innerHTML = filas;
 }
 
 function registrarCliente() {
@@ -161,6 +136,8 @@ async function cancelarReserva(idReserva){
   if(cancelar){
 
     sistema.cancelarReserva(idReserva)
+    // alerta.progressBarTimer('Cancelando reserva','Su reserva está siendo cancelada',2000);
+    alerta.exito('Reserva cancelada','Su reserva se canceló correctamente','Ok')
     iniciarCliente();
   }
 }
@@ -249,7 +226,7 @@ function cargarConciertosDisponibles(){
 let conciertoSeleccionado = null;
 
 function abrirPopUpReserva(idConcierto) {
-  let concierto = sistema.buscarConciertoPorId(idConcierto)
+  let concierto = sistema.obtenerConciertoPorId(idConcierto)
   conciertoSeleccionado = concierto;
 
   const PopUpReserva = document.querySelector("#PopUpReservaReserva");
@@ -277,7 +254,7 @@ function confirmarReserva() {
   sistema.crearReserva(sistema.obtenerUsuarioLogueado(),conciertoSeleccionado,cantidad,cantidad*conciertoSeleccionado.precio);
   iniciarCliente()
   
-  alert(`✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`);
+  alerta.exito('Reserva confirmada!',`Su reserva para el concierto ${conciertoSeleccionado.nombre} ha sido confirmada`,'Ok')
+  // alert(`✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`);
   cerrarPopUpReserva();
-  // cargarConciertosDisponibles(); // actualiza la lista
 }

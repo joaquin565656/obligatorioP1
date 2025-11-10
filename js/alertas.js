@@ -9,11 +9,13 @@ class Alertas {
     });
   }
   exito(titulo,texto,tituloBtn){
-     Swal.fire({
-    title: titulo,
-    text: texto,
-    icon: 'success',
-    confirmButtonText: tituloBtn
+      Swal.fire({
+      position: "center-center",
+      title: titulo,
+      text: texto,
+      icon: 'success',
+      showConfirmButton: false,
+      timer:2000
   });
   }
   async confirmacion(titulo,texto,icono,textoBtnConfirmar,textoBtnCancelar,mostrarBtnCancelar){

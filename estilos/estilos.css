@@ -127,13 +127,16 @@
       transform: scale(0.98);
     }
 
-
     .contenedor__seccionAdmin,
     .contenedorRegistroCliente{
       display: none;
       margin: 1rem;
       width: 100%;
       /* overflow: visible; */
+    }
+
+    .contenedor__seccionAdmin h1{
+      padding: 1rem;
     }
 
 /* Cliente */

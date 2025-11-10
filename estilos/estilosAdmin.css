@@ -1,0 +1,8 @@
+.btnProcesarReserva{
+    display: flex;
+    width: max-content;
+}
+
+.reservasAdmin{
+    padding: 1rem;
+}

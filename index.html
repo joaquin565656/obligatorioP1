@@ -8,6 +8,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="estilos/estilos.css">
+    <link rel="stylesheet" href="estilos/estilosAdmin.css">
 
 </head>
 
@@ -21,7 +22,7 @@
         <h1>Iniciar Sesión</h1>
         <form id="login">
             <label for="username">Usuario:</label>
-            <input type="text" id="username" required value="joaco">
+            <input type="text" id="username" required value="admin">
 
             <label for="password">Contraseña:</label>
             <input type="password" id="password" required value="1234">
@@ -60,20 +61,56 @@
     <div class="seccion contenedor__seccionAdmin" id="seccionAdmin">
         <h1>Panel de Administración</h1>
 
-        <div class="listaUsuarios">
-            <h2>Lista de Usuarios</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaClientes">
+        <div class="contenedorReservas">
 
-                </tbody>
-            </table>
+            <div class="reservasAdmin">
+                <h2>Reservas Pendientes</h2>
+                <table>
+                    <thead>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Concierto</th>
+                        <th>Cantidad Entradas</th>
+                        <th>Total a Pagar</th>
+                        <th>Acción</th>
+                    </thead>
+                    <tbody id="adminReservasPendientesTBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="reservasAdmin">
+                <h2>Reservas Aprobadas</h2>
+                <table>
+                    <thead>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Concierto</th>
+                        <th>Cantidad Entradas</th>
+                        <th>Total a Pagar</th>
+                    </thead>
+                    <tbody id="adminReservasAprobadasTBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="reservasAdmin">
+                <h2>Reservas Canceladas</h2>
+                <table>
+                    <thead>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Concierto</th>
+                        <th>Cantidad Entradas</th>
+                        <th>Total a Pagar</th>
+                    </thead>
+                    <tbody id="adminReservasCanceladasTBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
     <div class="seccion contenedor__seccionAdmin" id="seccionCliente">
@@ -168,6 +205,7 @@
     <script src="js/clases.js"></script>
     <script src="js/alertas.js"></script>
     <script src="js/code.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 
 </html>
