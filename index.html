@@ -21,40 +21,40 @@
     <div class="seccion contenedorLogin" id="contenedorLogin">
         <h1>Iniciar Sesión</h1>
         <form id="login">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" required value="admin">
+            <label for="username">Usuario:
+                <input type="text" id="username" required value="admin">
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" required value="1234">
+                <label for="password">Contraseña:
+                    <input type="password" id="password" required value="1234">
 
-            <button type="button" onclick="login()">Ingresar</button>
+                    <button type="button" onclick="login()">Ingresar</button>
         </form>
         <div class="contenedorBtnRegistrarse">
-            <label class="lblRegistrarse">¿No tienes una cuenta?</label>
-            <button type="button" onclick="mostrarSeccion('contenedorRegistro')"
-                class="btnRegistrarse">Registrarse</button>
+            <label class="lblRegistrarse">¿No tienes una cuenta?
+                <button type="button" onclick="mostrarSeccion('contenedorRegistro')"
+                    class="btnRegistrarse">Registrarse</button>
         </div>
     </div>
 
     <div class="seccion contenedorRegistroCliente contenedorLogin" id="contenedorRegistro">
         <h1>Registrar Cliente</h1>
         <form id="registroCliente">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" required>
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" required>
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" required>
+            <label for="nombre">Nombre:
+                <input type="text" id="nombre" required>
+                <label for="apellido">Apellido:
+                    <input type="text" id="apellido" required>
+                    <label for="usuario">Usuario:
+                        <input type="text" id="usuario" required>
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" required>
+                        <label for="password">Contraseña:
+                            <input type="password" id="password" required>
 
-            <button type="button" onclick="registrarCliente()">Crear Cuenta</button>
+                            <button type="button" onclick="registrarCliente()">Crear Cuenta</button>
         </form>
         <div class="contenedorBtnRegistrarse">
-            <label class="lblRegistrarse">¿Ya tienes una cuenta?</label>
-            <button type="button" onclick="mostrarSeccion('contenedorLogin')" class="btnRegistrarse">Iniciar
-                Sesión</button>
+            <label class="lblRegistrarse">¿Ya tienes una cuenta?
+                <button type="button" onclick="mostrarSeccion('contenedorLogin')" class="btnRegistrarse">Iniciar
+                    Sesión</button>
         </div>
     </div>
 
@@ -75,7 +75,7 @@
                         <th>Acción</th>
                     </thead>
                     <tbody id="adminReservasPendientesTBody">
-                        
+
                     </tbody>
                 </table>
             </div>
@@ -90,11 +90,11 @@
                         <th>Total a Pagar</th>
                     </thead>
                     <tbody id="adminReservasAprobadasTBody">
-                        
+
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="reservasAdmin">
                 <h2>Reservas Canceladas</h2>
                 <table>
@@ -106,26 +106,103 @@
                         <th>Total a Pagar</th>
                     </thead>
                     <tbody id="adminReservasCanceladasTBody">
-                        
+
                     </tbody>
                 </table>
             </div>
 
         </div>
+
+        <div class="contenedorConciertosAdmin">
+            <h2>Administración de Conciertos</h2>
+
+            <div class="contenedorBtnConciertosAdmin">
+                <button type="button" onclick="abrirPopUpCrearConcierto()">Crear</button>
+                <button type="button">Modificar</button>
+                <button type="button">Cancelar</button>
+            </div>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Artista</th>
+                    <th>Cupos</th>
+                    <th>Estado</th>
+                    <th>Oferta</th>
+                    <th>Acciones</th>
+                </thead>
+
+                <tbody id="tablaConciertosAdmin">
+                </tbody>
+            </table>
+        </div>
+       <!-- POPUP CREAR CONCIERTO -->
+<div class="PopUpCrearConcierto" id="PopUpCrearConcierto">
+  <div class="PopUpCrearConcierto__contenido">
+    <button class="PopUpCrearConcierto__cerrar" onclick="cerrarPopUpCrearConcierto()">×</button>
+
+    <h2>🎤 Crear Concierto</h2>
+
+    <form id="formCrearConcierto" class="formCrearConcierto">
+      <div class="contenedorDatoFormulario">
+        <label for="nombreConcierto">Nombre del evento:</label>
+        <input class="inputConcierto" type="text" id="nombreConcierto" required/>
+      </div>
+
+      <div class="contenedorDatoFormulario">
+        <label for="artistaConcierto">Artista principal:</label>
+        <input class="inputConcierto" type="text" id="artistaConcierto" required/>
+      </div>
+
+      <div class="contenedorDatoFormulario">
+        <label for="precioConcierto">Precio ($):</label>
+        <input class="inputConcierto" type="number" id="precioConcierto" required/>
+      </div>
+
+      <div class="contenedorDatoFormulario">
+        <label for="descripcionConcierto">Descripción:</label>
+        <textarea class="inputConcierto" id="descripcionConcierto"required></textarea>
+      </div>
+
+      <div class="contenedorDatoFormulario">
+        <label for="imagenConcierto">Imagen (URL):</label>
+        <input class="inputConcierto" type="text" id="imagenConcierto" required/>
+      </div>
+
+      <div class="contenedorDatoFormulario">
+        <label for="cuposDisponiblesConcierto">Cupos disponibles:</label>
+        <input class="inputConcierto" type="number" id="cuposDisponiblesConcierto" required/>
+      </div>
+
+      <div class="contenedorDatoFormulario contenedorChkOferta">
+        <label for="chkOfertaConcierto">En oferta:</label>
+        <input type="checkbox" id="chkOfertaConcierto"/>
+      </div>
+
+      <div class="contenedorBotonesCrearConcierto">
+        <button type="button" id="btnCrearConcierto" onclick="crearConcierto()">Crear</button>
+        <button type="button" class="btnCancelar" onclick="cerrarPopUpCrearConcierto()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
     </div>
     <div class="seccion contenedor__seccionAdmin" id="seccionCliente">
         <!-- <h1>Panel de Cliente</h1> -->
 
         <div class="contenedorConciertos">
 
-        
+
             <h2 class="titulo-conciertos">🎵 Lista de conciertos disponibles</h2>
             <div class="contenedorBuscar">
                 <p><strong>Buscar</strong></p>
                 <input type="text" placeholder="Nombre del evento" id="inputBuscarConcierto"
                     onkeyup="cargarConciertosDisponibles()">
-                        <label for="checkboxOfertas">Solo ofertas</label>
-                        <input class="chkOfertas" type="checkbox" id="checkboxOfertas" onchange="cargarConciertosDisponibles()">
+                <label for="checkboxOfertas">Solo ofertas
+                    <input class="chkOfertas" type="checkbox" id="checkboxOfertas"
+                        onchange="cargarConciertosDisponibles()">
             </div>
 
             <div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
@@ -150,10 +227,10 @@
             <div class="contenedorTituloReservaResumen">
                 <h2>Reservas Realizadas</h2>
                 <div class="contenedorResumenReserva" id="contenedorResumenReserva">
-                    
+
                 </div>
             </div>
-                
+
             <table>
                 <thead>
                     <th>ID</th>
@@ -165,7 +242,7 @@
                     <th>Acción</th>
                 </thead>
                 <tbody id="tablaReservas">
-                    
+
                 </tbody>
             </table>
         </div>
@@ -174,34 +251,34 @@
 
     </div>
 
-    
-<!-- POPUP RESERVA -->
-<div class="PopUpReservaReserva" id="PopUpReservaReserva">
-  <div class="PopUpReserva__contenido">
-    <button class="PopUpReserva__cerrar" onclick="cerrarPopUpReserva()">×</button>
 
-    <div class="PopUpReserva__body">
-      <div class="PopUpReserva__imagen">
-        <img id="PopUpReservaImagenConcierto" src="" alt="Imagen del concierto" />
-      </div>
+    <!-- POPUP RESERVA -->
+    <div class="PopUpReservaReserva" id="PopUpReservaReserva">
+        <div class="PopUpReserva__contenido">
+            <button class="PopUpReserva__cerrar" onclick="cerrarPopUpReserva()">×</button>
 
-      <div class="PopUpReserva__info">
-        <h2 id="PopUpReservaNombreConcierto">Concierto</h2>
-        <p id="PopUpReservaArtista"><strong>Artista:</strong> </p>
-        <p id="PopUpReservaPrecio"><strong>Precio:</strong> </p>
-        <p id="PopUpReservaCupos"><strong>Cupos disponibles:</strong> </p>
+            <div class="PopUpReserva__body">
+                <div class="PopUpReserva__imagen">
+                    <img id="PopUpReservaImagenConcierto" src="" alt="Imagen del concierto" />
+                </div>
 
-        <label for="cantidadEntradas"><strong>Cantidad de entradas:</strong></label>
-        <input type="number" id="cantidadEntradas" min="1" value="1" />
+                <div class="PopUpReserva__info">
+                    <h2 id="PopUpReservaNombreConcierto">Concierto</h2>
+                    <p id="PopUpReservaArtista"><strong>Artista:</strong> </p>
+                    <p id="PopUpReservaPrecio"><strong>Precio:</strong> </p>
+                    <p id="PopUpReservaCupos"><strong>Cupos disponibles:</strong> </p>
 
-        <div class="PopUpReserva__acciones">
-          <button class="btnCancelar" onclick="cerrarPopUpReserva()">Cancelar</button>
-          <button class="btnConfirmar" onclick="confirmarReserva()">Confirmar</button>
+                    <label for="cantidadEntradas"><strong>Cantidad de entradas:</strong>
+                        <input type="number" id="cantidadEntradas" min="1" value="1" />
+
+                        <div class="PopUpReserva__acciones">
+                            <button class="btnCancelar" onclick="cerrarPopUpReserva()">Cancelar</button>
+                            <button class="btnConfirmar" onclick="confirmarReserva()">Confirmar</button>
+                        </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
     <script src="js/clases.js"></script>
     <script src="js/alertas.js"></script>
     <script src="js/code.js"></script>

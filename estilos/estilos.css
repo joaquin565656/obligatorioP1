@@ -116,6 +116,10 @@
       width: 100%;
       font-weight: 600;
       transition: background 0.2s ease, transform 0.1s ease;
+      width: max-content;
+    }
+    form button{
+      width:100% ;
     }
 
     form button:hover {

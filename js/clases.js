@@ -155,6 +155,9 @@ class Sistema {
         this.listaDeConciertos.push(nuevoConcierto);
     }
 
+    obtenerListaConciertosTotales(){
+        return this.listaDeConciertos;
+    }
     obtenerListaConciertosDisponibles(){
         let lista = [];
         for(let concierto of this.listaDeConciertos){
@@ -326,8 +329,6 @@ if(reserva.concierto.cuposDisponibles<=0){
 }
 // Actualizo los datos
 iniciarAdmin();
-
-
 }
 
 aprobarReserva(idReserva){
@@ -336,6 +337,39 @@ aprobarReserva(idReserva){
     reserva.estado = estadoAprobado;
 }
 
+validarConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,form){
+    console.log(nombre);
+    console.log(artista);
+    
+   if (!form.reportValidity()) {
+    return false;
+  }
+
+// Verifico para asegurarme que tenga datos
+  if(nombre =="" || artista =="" || descripcion == "" || imagen =="" ){
+    alert("Complete todos los campos")
+    return false;
+  }
+
+    if(isNaN(precio)){
+        alert("Ingrese precio solamente en números")
+        return false;
+    }
+    
+    if(isNaN(cuposDisponibles)){
+        alert("Ingrese cantidad de cupos disponibles solamente en números")
+        return false;
+    }
+
+    if(precio <=0){
+        alert("Precio debe ser un número mayor a cero");
+        return false;
+    }else if(cuposDisponibles <=0){
+        alert("Cantidad de cupos debe ser un número mayor a cero");
+        return false;
+    }
+    return true;
+}
 
 }
 
