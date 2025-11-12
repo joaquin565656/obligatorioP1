@@ -3,19 +3,49 @@ function iniciarAdmin(){
     document.querySelector("#contenedorPanelSuperior").style.display = "flex";
     cargarTablasReservas();
     cargarTablaConciertosAdmin();
+    cargarTablaResumenGanancias();
     //abrirPopUpCrearConcierto(undefined);
 }
 
-const ID_ESTADO_PENDIENTE = 1;
-const ID_ESTADO_APROBADAS = 2;
-const ID_ESTADO_CANCELADAS = 3;
+
 function cargarTablasReservas(){
     // Pendientes
-    document.querySelector("#adminReservasPendientesTBody").innerHTML = cargarTablaPorIdEstado(ID_ESTADO_PENDIENTE)
+    document.querySelector("#adminReservasPendientesTBody").innerHTML = cargarTablaPorIdEstado(sistema.ID_ESTADO_PENDIENTE)
     // Aprobadas
-    document.querySelector("#adminReservasAprobadasTBody").innerHTML = cargarTablaPorIdEstado(ID_ESTADO_APROBADAS)
+    document.querySelector("#adminReservasAprobadasTBody").innerHTML = cargarTablaPorIdEstado(sistema.ID_ESTADO_APROBADA)
     // Canceladas
-    document.querySelector("#adminReservasCanceladasTBody").innerHTML = cargarTablaPorIdEstado(ID_ESTADO_CANCELADAS)
+    document.querySelector("#adminReservasCanceladasTBody").innerHTML = cargarTablaPorIdEstado(sistema.ID_ESTADO_CANCELADA)
+}
+
+function cargarTablaResumenGanancias(){
+  
+    let listaAgrupada = sistema.agruparReservasPorConcierto()
+
+    let tr ="";
+    let totalRecaudado = sistema.obtenerTotalRecaudado();
+    for(let lista of listaAgrupada){
+        tr += `
+        <tr>
+            <td>${lista.concierto.nombre}</td>
+            <td>${lista.cantidadEntradas}</td>
+            <td>${lista.total}</td>
+        </tr>
+        `
+    }
+    tr +=
+    `
+     <tr>
+                <td colSpan="3" style="background-color:#e0e0e0; font-weight:bold; text-align:center;">Resumen:</td>
+  </tr>
+  <tr>
+            <td style="background-color:#e0e0e0; font-weight:bold; text-align:center;"></td>
+            <td style="background-color:#e0e0e0; font-weight:bold; text-align:center;">Total Recaudado:</td>
+            <td style="background-color:#e0e0e0; font-weight:bold; text-align:center;">${totalRecaudado}</td>
+        </tr>
+        
+        `
+    
+    document.querySelector("#tablaResumenGanancias").innerHTML = tr;
 }
 
 function cargarTablaPorIdEstado(idEstado){

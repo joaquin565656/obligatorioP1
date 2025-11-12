@@ -1,0 +1,14 @@
+Ordenar en admin y code por funciones.
+por ejemplo todas las cargas de tablas juntas, y asi
+
+cambiar sweet alert por mensajes comunes o hacer algunos
+
+casos de prueba
+cambiar documento analisis
+
+ver tema url imagen en conciertos
+
+leer letra y corroborar que tenga todo
+sacar console.log que estén mal
+agregar datos de prueba
+ordenar codigo clases, sistema, code y admin

@@ -3,7 +3,9 @@
     width: max-content;
 }
 
-.reservasAdmin,.contenedorConciertosAdmin{
+.reservasAdmin,
+.contenedorConciertosAdmin,
+.contenedorResumenGanancias{
     padding: 1rem;
 }
 

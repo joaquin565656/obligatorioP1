@@ -22,7 +22,7 @@
         <h1>Iniciar Sesión</h1>
         <form id="login">
             <label for="username">Usuario:
-                <input type="text" id="username" required value="admin">
+                <input type="text" id="username" required value="joaco">
 
                 <label for="password">Contraseña:
                     <input type="password" id="password" required value="1234">
@@ -132,6 +132,17 @@
 
                 <tbody id="tablaConciertosAdmin">
                 </tbody>
+            </table>
+        </div>
+        <div class="contenedorResumenGanancias">
+            <h2>Resumen Ganancias</h2>
+            <table>
+                <thead>
+                    <th>Concierto</th>
+                    <th>Cantidad Entradas</th>
+                    <th>Total</th>
+                </thead>
+                <tbody id="tablaResumenGanancias"></tbody>
             </table>
         </div>
        <!-- POPUP CREAR CONCIERTO -->
@@ -264,7 +275,7 @@
         </div>
     </div>
     <script src="js/clases.js"></script>
-    <script src="js/alertas.js"></script>
+    <!-- <script src="js/alertas.js"></script> -->
     <script src="js/code.js"></script>
     <script src="js/admin.js"></script>
 </body>
