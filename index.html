@@ -117,9 +117,7 @@
             <h2>Administración de Conciertos</h2>
 
             <div class="contenedorBtnConciertosAdmin">
-                <button type="button" onclick="abrirPopUpCrearConcierto()">Crear</button>
-                <button type="button">Modificar</button>
-                <button type="button">Cancelar</button>
+                <button type="button" class="btnNuevoConcierto" onclick="abrirPopUpCrearConcierto(null)">Nuevo Concierto</button>
             </div>
             <table>
                 <thead>
@@ -146,32 +144,32 @@
     <form id="formCrearConcierto" class="formCrearConcierto">
       <div class="contenedorDatoFormulario">
         <label for="nombreConcierto">Nombre del evento:</label>
-        <input class="inputConcierto" type="text" id="nombreConcierto" required/>
+        <input class="inputConcierto" type="text" id="nombreConcierto" name="nombreConcierto" />
       </div>
 
       <div class="contenedorDatoFormulario">
         <label for="artistaConcierto">Artista principal:</label>
-        <input class="inputConcierto" type="text" id="artistaConcierto" required/>
+        <input class="inputConcierto" type="text" id="artistaConcierto" />
       </div>
 
       <div class="contenedorDatoFormulario">
         <label for="precioConcierto">Precio ($):</label>
-        <input class="inputConcierto" type="number" id="precioConcierto" required/>
+        <input class="inputConcierto" type="number" id="precioConcierto" />
       </div>
 
       <div class="contenedorDatoFormulario">
         <label for="descripcionConcierto">Descripción:</label>
-        <textarea class="inputConcierto" id="descripcionConcierto"required></textarea>
+        <textarea class="inputConcierto" id="descripcionConcierto"></textarea>
       </div>
 
       <div class="contenedorDatoFormulario">
         <label for="imagenConcierto">Imagen (URL):</label>
-        <input class="inputConcierto" type="text" id="imagenConcierto" required/>
+        <input class="inputConcierto" type="text" id="imagenConcierto" />
       </div>
 
       <div class="contenedorDatoFormulario">
         <label for="cuposDisponiblesConcierto">Cupos disponibles:</label>
-        <input class="inputConcierto" type="number" id="cuposDisponiblesConcierto" required/>
+        <input class="inputConcierto" type="number" id="cuposDisponiblesConcierto" />
       </div>
 
       <div class="contenedorDatoFormulario contenedorChkOferta">
@@ -206,20 +204,6 @@
             </div>
 
             <div class="contenedor__tarjetasConciertos" id="contenedorConcierto">
-                <!-- <div class="tarjeta" id="tarjetaConcierto">
-                    <span class="badge-oferta"> En oferta</span>
-                    <div class="imgconcierto">
-                    <img src="./imagenes/ConciertoShakira.jpg" alt="Imagen del Concierto" class="img">
-                    </div>
-
-                    <div class="datosConcierto">
-                    <h3 class="nombreConcierto">Concierto de Shakira</h3>
-                    <p><strong>Artista:</strong> Shakira</p>
-                    <p><strong>Precio:</strong> $1500</p>
-                    <p><strong>Cupos disponibles:</strong> 120</p>
-                    <button type="button" class="btnReservar">Reservar entrada</button>
-                    </div>
-                </div> -->
             </div>
         </div>
 

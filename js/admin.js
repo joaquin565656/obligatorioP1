@@ -3,16 +3,19 @@ function iniciarAdmin(){
     document.querySelector("#contenedorPanelSuperior").style.display = "flex";
     cargarTablasReservas();
     cargarTablaConciertosAdmin();
-    abrirPopUpCrearConcierto();
+    //abrirPopUpCrearConcierto(undefined);
 }
 
+const ID_ESTADO_PENDIENTE = 1;
+const ID_ESTADO_APROBADAS = 2;
+const ID_ESTADO_CANCELADAS = 3;
 function cargarTablasReservas(){
     // Pendientes
-    document.querySelector("#adminReservasPendientesTBody").innerHTML = cargarTablaPorIdEstado(1)
+    document.querySelector("#adminReservasPendientesTBody").innerHTML = cargarTablaPorIdEstado(ID_ESTADO_PENDIENTE)
     // Aprobadas
-    document.querySelector("#adminReservasAprobadasTBody").innerHTML = cargarTablaPorIdEstado(2)
+    document.querySelector("#adminReservasAprobadasTBody").innerHTML = cargarTablaPorIdEstado(ID_ESTADO_APROBADAS)
     // Canceladas
-    document.querySelector("#adminReservasCanceladasTBody").innerHTML = cargarTablaPorIdEstado(3)
+    document.querySelector("#adminReservasCanceladasTBody").innerHTML = cargarTablaPorIdEstado(ID_ESTADO_CANCELADAS)
 }
 
 function cargarTablaPorIdEstado(idEstado){
@@ -35,6 +38,19 @@ function cargarTablaPorIdEstado(idEstado){
     return trReserva;
 }
 
+function cambiarEstadoConcierto(idConcierto,estado){
+    console.log(idConcierto);
+    
+    if(sistema.cambiarEstadoConcierto(idConcierto,estado)){
+        iniciarAdmin();
+    }
+}
+function pausarConcierto(idConcierto){
+    
+    if(sistema.pausarConcierto(idConcierto)){
+        iniciarAdmin();
+    }
+}
 function cargarTablaConciertosAdmin(){
     let conciertos = sistema.obtenerListaConciertosTotales();
     let trConcierto = "";
@@ -48,7 +64,16 @@ function cargarTablaConciertosAdmin(){
             <td>${concierto.cuposDisponibles} </td>
             <td>${concierto.estado ? 'Activo':'Pausa'} </td>
             <td><input type = "checkbox" ${concierto.oferta ? 'checked': ''} disabled></checkbox> </td>
-            <td><button type = "button">Modificar </button> </td>
+            <td>
+            <div class="contenedorAcciones">
+                <button type="button" onClick="abrirPopUpCrearConcierto('${concierto.id}')" class="btnModificar">Modificar </button> 
+                ${!concierto.estado ? 
+                    `<button type = "button" class="estadoActivar" onClick="cambiarEstadoConcierto('${concierto.id}',true)">Activar </button>`:
+                    `<button type = "button" class="estadoPausa" onClick="cambiarEstadoConcierto('${concierto.id}',false)">Pausar </button>`
+            }
+            </div>
+            </td>
+           
         </tr>`
     }
     document.querySelector("#tablaConciertosAdmin").innerHTML = trConcierto;
@@ -58,8 +83,36 @@ function cerrarPopUpCrearConcierto(){
         document.getElementById("PopUpCrearConcierto").style.display = "none";   
 }
 
-function abrirPopUpCrearConcierto(){
+let idConciertoEditando = null;
+function abrirPopUpCrearConcierto(idConcierto){
     document.getElementById("PopUpCrearConcierto").style.display = "flex";
+    let form = document.querySelector("#formCrearConcierto");
+    // Está editando
+    if(idConcierto!=null){
+        idConciertoEditando = idConcierto;
+        let concierto = sistema.obtenerConciertoPorId(idConcierto);
+
+    let nombre = document.querySelector("#nombreConcierto").value = concierto.nombre;
+    let artista = document.querySelector("#artistaConcierto").value = concierto.artista;
+    let precio = document.querySelector("#precioConcierto").value = concierto.precio;
+    let descripcion = document.querySelector("#descripcionConcierto").value = concierto.descripcion;
+    let imagen = document.querySelector("#imagenConcierto").value = concierto.imagen;
+    let cuposDisponibles = document.querySelector("#cuposDisponiblesConcierto").value = concierto.cuposDisponibles;
+    let oferta = document.querySelector("#chkOfertaConcierto").checked = concierto.oferta;
+
+    
+    document.querySelector("#btnCrearConcierto").textContent = `Guardar Cambios`
+            
+
+
+    }else{
+        // Está creando
+        idConciertoEditando = null;
+        form.reset();
+        document.querySelector("#btnCrearConcierto").textContent = "Crear"
+
+        
+    }
 }
 
 function crearConcierto(){
@@ -76,11 +129,18 @@ function crearConcierto(){
        return;   
     }
 
+    // si es un concierto nuevo
+    
+if(idConciertoEditando== null){    
     sistema.crearConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,oferta);
     alert("Concierto creado correctamente");
-    iniciarAdmin();
-    form.reset();
-    cerrarPopUpCrearConcierto();
- 
+}else{
+    if(sistema.editarConcierto(idConciertoEditando, nombre,artista,precio,descripcion,imagen,cuposDisponibles,oferta))
+        alert("Concierto editado correctamente");
+}
+
+iniciarAdmin();
+form.reset();
+cerrarPopUpCrearConcierto();
     
 }

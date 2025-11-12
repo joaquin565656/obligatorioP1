@@ -119,6 +119,14 @@ textarea {
   background-color: #1d4ed8;
 }
 
+
+.btnNuevoConcierto {
+  background-color: #27ae60;
+}
+.btnNuevoConcierto:hover {
+  background-color: #219150;
+}
+
 .btnCancelar {
   background-color: #9ca3af;
   color: white;
@@ -131,3 +139,41 @@ textarea {
 .btnCancelar:hover {
   background-color: #6b7280;
 }
+
+.contenedorAcciones{
+  display: flex;
+  width: max-content;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.estadoActivar {
+  background-color: #2ecc71;   
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.estadoActivar:hover {
+  background-color: #27ae60;  
+}
+
+.estadoPausa {
+  background-color: #e67e22;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.estadoPausa:hover {
+  background-color: #d4ac0d; 
+}
+
+.btnModificar {
+  background-color: #3498db;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btnModificar:hover {
+  background-color: #2980b9; 
+}
+

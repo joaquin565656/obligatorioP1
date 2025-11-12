@@ -8,6 +8,8 @@ class Sistema {
         this.listaReservas = [];
         this.usuarioLogueado = null;
         this.resumenCliente = []
+        this.ID_ESTADO_CANCELADA = 3;
+        this.ID_ESTADO_APROBADA = 2;
         this.precargar();
     }
 
@@ -23,8 +25,8 @@ class Sistema {
         this.listaDeConciertos.push(new Concierto("Concierto de Michael Jackson","Michael Jackson",160000,'Smooth Criminal','./imagenes/ConciertoMichaelJackson.jpg',4,true,false));
         this.listaDeConciertos.push(new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false));
         this.listaDeConciertos.push(new Concierto("Concierto de Metallica","Metallica",15000,'Metallica WorldWired Tour','./imagenes/ConciertoMetallica.png',100,true,true));
-        this.listaDeConciertos.push(new Concierto("Concierto de ACDC","ACDC",15000,'ACDC Gira','./imagenes/ConciertoACDC.png',100,true,true));
-        this.listaDeConciertos.push(new Concierto("Concierto de Bad Bunny","Bad Bunny",8000,'Bad Bunny Live','./imagenes/ConciertoBadBunny.png',100,true,false));
+        this.listaDeConciertos.push(new Concierto("Concierto de ACDC","ACDC",15000,'ACDC Gira','./imagenes/ConciertoACDC.png',100,false,true));
+        this.listaDeConciertos.push(new Concierto("Concierto de Bad Bunny","Bad Bunny",8000,'Bad Bunny Live','./imagenes/ConciertoBadBunny.png',100,false,false));
         this.listaDeConciertos.push(new Concierto("Concierto de Taylor Swift","Taylor Swift",20000,'The Eras Tour','./imagenes/ConciertoTaylorSwift.png',100,true,true));
 
         this.listaEstadosReserva.push(new EstadoReserva("Pendiente", true));
@@ -155,6 +157,61 @@ class Sistema {
         this.listaDeConciertos.push(nuevoConcierto);
     }
 
+    cambiarEstadoConcierto(idConcierto,estado){
+        let concierto = this.obtenerConciertoPorId(idConcierto);
+        console.log(concierto);
+        console.log(idConcierto);
+        console.log(estado);
+        
+        if(concierto == null){
+            alert("No se encontró concierto");
+            return;
+        }
+        // Para activar concierto
+        if(estado){
+
+            if(concierto.cuposDisponibles<= 0){
+                alert("No se puede activar este concierto porque no tiene cupos disponibles");
+                return false;
+            }
+            concierto.estado = true;
+            console.log(concierto);
+            return true;
+        }else{
+            concierto.estado = false;
+            console.log(concierto);
+            return true;
+            
+        }
+        return false;
+    }
+
+    editarConcierto(idConcierto,nombre,artista,precio,descripcion,imagen,cuposDisponibles,oferta){
+        let conciertoEditar = null;
+        
+        for(let concierto of this.listaDeConciertos){
+            if(concierto.id == idConcierto){
+                conciertoEditar = concierto;
+            }
+        }
+        
+        if(conciertoEditar!=null){            
+            conciertoEditar.nombre = nombre;
+            conciertoEditar.artista = artista;
+            conciertoEditar.precio = precio;
+            conciertoEditar.descripcion = descripcion;
+            conciertoEditar.imagen = imagen;
+            conciertoEditar.cuposDisponibles = cuposDisponibles;
+            conciertoEditar.oferta = oferta;
+            return true;
+
+            // Si no encuentra concierto
+        }else{
+            alert("No se encontró concierto a editar");
+            return false; 
+        }
+    }
+
     obtenerListaConciertosTotales(){
         return this.listaDeConciertos;
     }
@@ -173,7 +230,7 @@ class Sistema {
             if(concierto.id == id)
                 return concierto;
         }
-        return undefined;
+        return null;
     }
 
     crearReserva(cliente,concierto,cantidadEntradas,totalAPagar){
@@ -213,11 +270,12 @@ class Sistema {
                 return estado
             }
         }
-        return undefined;
+        return null;
     }
+
     cancelarReserva(idReserva){
         let reserva = this.obtenerReservaPorID(idReserva);        
-        reserva.estado = this.obtenerEstadoReservaPorId(3);
+        reserva.estado = this.obtenerEstadoReservaPorId(this.ID_ESTADO_CANCELADA);
     }
 
 
@@ -268,7 +326,7 @@ class Sistema {
                 return cliente;
             }
         }
-        return undefined;
+        return null;
     }
 
     disponeSaldo(idCliente,totalAPagar){
@@ -333,14 +391,11 @@ iniciarAdmin();
 
 aprobarReserva(idReserva){
     let reserva = this.obtenerReservaPorID(idReserva);
-    let estadoAprobado = this.obtenerEstadoReservaPorId(2);
+    let estadoAprobado = this.obtenerEstadoReservaPorId(this.ID_ESTADO_APROBADA);
     reserva.estado = estadoAprobado;
 }
 
 validarConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,form){
-    console.log(nombre);
-    console.log(artista);
-    
    if (!form.reportValidity()) {
     return false;
   }
