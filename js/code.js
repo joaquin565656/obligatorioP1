@@ -2,7 +2,7 @@ let sistema = new Sistema();
 
 window.addEventListener("load", inicio);
 
-async function inicio() {
+function inicio() {
   login();
 }
 
@@ -112,7 +112,7 @@ function obtenerListaConciertosFiltro() {
   } else {
     conciertos = listaConciertos;
   }
-  // abrirPopUpReserva(conciertos[0]);
+
   if (soloOfertas) {
     let conciertosOfertas = [];
     for (let concierto of conciertos) {
@@ -125,7 +125,7 @@ function obtenerListaConciertosFiltro() {
   return conciertos;
 }
 
-async function cancelarReserva(idReserva) {
+function cancelarReserva(idReserva) {
   var ok = window.confirm(
     `¿Seguro que desea cancelar la reserva ${idReserva}?`
   );

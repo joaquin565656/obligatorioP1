@@ -383,15 +383,13 @@ procesarReserva(idReserva){
 let reserva = this.obtenerReservaPorID(idReserva)
 
 if(!this.disponeSaldo(reserva.cliente.id,reserva.totalAPagar)){
-    this.cancelarReserva(idReserva);
-    iniciarAdmin();   
+    this.cancelarReserva(idReserva); 
     alert("Se canceló la reserva por no tener saldo disponible");
     return;
 }
 
 if(!this.cuposDisponibles(reserva.concierto.id,reserva.cantidadEntradas)){
     this.cancelarReserva(idReserva);
-    iniciarAdmin();
     alert("Se canceló la reserva por no haber cupos disponibles");
     return;
     
@@ -399,7 +397,6 @@ if(!this.cuposDisponibles(reserva.concierto.id,reserva.cantidadEntradas)){
 
 if(!reserva.concierto.estado){
     this.cancelarReserva(idReserva);
-    iniciarAdmin();
     alert("Se canceló la reserva porque el concierto no está activo");
     return;
 }
@@ -418,8 +415,8 @@ reserva.concierto.cuposDisponibles -= reserva.cantidadEntradas;
 if(reserva.concierto.cuposDisponibles<=0){
     reserva.concierto.estado = false;
 }
-// Actualizo los datos
-iniciarAdmin();
+
+alert("La reserva se aprobó");
 }
 
 aprobarReserva(idReserva){

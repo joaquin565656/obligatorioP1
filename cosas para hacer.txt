@@ -1,8 +1,6 @@
 Ordenar en admin y code por funciones.
 por ejemplo todas las cargas de tablas juntas, y asi
 
-cambiar sweet alert por mensajes comunes o hacer algunos
-
 casos de prueba
 cambiar documento analisis
 

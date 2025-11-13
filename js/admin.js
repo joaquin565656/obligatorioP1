@@ -4,7 +4,6 @@ function iniciarAdmin() {
   cargarTablasReservas();
   cargarTablaConciertosAdmin();
   cargarTablaResumenGanancias();
-  //abrirPopUpCrearConcierto(undefined);
 }
 
 function cargarTablasReservas() {
@@ -61,7 +60,7 @@ function cargarTablaPorIdEstado(idEstado) {
             <td>${reserva.totalAPagar}</td>
             ${
               idEstado == 1
-                ? `<td><button type="button" class="btnProcesarReserva" onClick="sistema.procesarReserva('${reserva.id}')">Procesar</button></td>`
+                ? `<td><button type="button" class="btnProcesarReserva" onClick="procesarReserva('${reserva.id}')">Procesar</button></td>`
                 : ""
             }
         </tr>
@@ -71,6 +70,10 @@ function cargarTablaPorIdEstado(idEstado) {
   return trReserva;
 }
 
+function procesarReserva(idReserva){
+  sistema.procesarReserva(idReserva);
+  iniciarAdmin();
+}
 function cambiarEstadoConcierto(idConcierto, estado) {
   console.log(idConcierto);
 
@@ -160,9 +163,7 @@ function crearConcierto() {
   let precio = Number(document.querySelector("#precioConcierto").value);
   let descripcion = document.querySelector("#descripcionConcierto").value;
   let imagen = document.querySelector("#imagenConcierto").value;
-  let cuposDisponibles = document.querySelector(
-    "#cuposDisponiblesConcierto"
-  ).value;
+  let cuposDisponibles = Number(document.querySelector("#cuposDisponiblesConcierto").value);
   let oferta = document.querySelector("#chkOfertaConcierto").checked;
   let form = document.querySelector("#formCrearConcierto");
 
