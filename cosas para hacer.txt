@@ -1,6 +1,10 @@
 Ordenar en admin y code por funciones.
 por ejemplo todas las cargas de tablas juntas, y asi
 
+
+Agregar columna cliente en reservas pendientes. y cambiar imagen actual del documento
+sacar fondo a imagenes que corresponda 
+
 casos de prueba
 cambiar documento analisis
 

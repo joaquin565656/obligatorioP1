@@ -128,23 +128,23 @@ function abrirPopUpCrearConcierto(idConcierto) {
   // Está editando
   if (idConcierto != null) {
     idConciertoEditando = idConcierto;
+    let h2 = document.querySelector("#h2PopUpConcierto").innerHTML = `🎤 Modificar Concierto`;
     let concierto = sistema.obtenerConciertoPorId(idConcierto);
 
-    let nombre = (document.querySelector("#nombreConcierto").value =
-      concierto.nombre);
-    let artista = (document.querySelector("#artistaConcierto").value =
-      concierto.artista);
-    let precio = (document.querySelector("#precioConcierto").value =
-      concierto.precio);
-    let descripcion = (document.querySelector("#descripcionConcierto").value =
-      concierto.descripcion);
-    let imagen = (document.querySelector("#imagenConcierto").value =
-      concierto.imagen);
-    let cuposDisponibles = (document.querySelector(
+    let nombre = document.querySelector("#nombreConcierto").value = concierto.nombre;
+    let artista = document.querySelector("#artistaConcierto").value =
+      concierto.artista;
+    let precio = document.querySelector("#precioConcierto").value =
+      concierto.precio;
+    let descripcion = document.querySelector("#descripcionConcierto").value =
+      concierto.descripcion;
+    let imagen = document.querySelector("#imagenConcierto").value =
+      concierto.imagen;
+    let cuposDisponibles = document.querySelector(
       "#cuposDisponiblesConcierto"
-    ).value = concierto.cuposDisponibles);
-    let oferta = (document.querySelector("#chkOfertaConcierto").checked =
-      concierto.oferta);
+    ).value = concierto.cuposDisponibles;
+    let oferta = document.querySelector("#chkOfertaConcierto").checked =
+      concierto.oferta;
 
     document.querySelector(
       "#btnCrearConcierto"
