@@ -38,11 +38,11 @@ class Sistema {
     this.listaEstadosReserva.push(new EstadoReserva("Cancelada", true)); //id = 3
 
         // --- CONCIERTOS ---
-        this.listaDeConciertos.push(new Concierto("Smooth Criminal", "Michael Jackson", 3000, "Generado con IA.", "./imagenes/ConciertoMichaelJackson.jpg", 200, true, false));
-        this.listaDeConciertos.push(new Concierto("Rock al Parque", "La Vela Puerca", 1500, "Festival de rock uruguayo.", "./imagenes/ConciertoLaVela.png", 100, true, true));
-        this.listaDeConciertos.push(new Concierto("Blues Session", "B.B. King", 2000, "Noche de blues.", "./imagenes/ConciertoBBKing.png", 50, true, true));
-        this.listaDeConciertos.push(new Concierto("Metal Fest", "Rata Blanca", 1800, "Metal argentino en vivo.", "./imagenes/ConciertoRataBlanca.jpg", 0, false, false));
-        this.listaDeConciertos.push(new Concierto("Pop Night", "Dua Lipa", 2500, "Show internacional de pop.", "./imagenes/ConciertoDuaLipa.png", 3, true, false));
+        this.listaDeConciertos.push(new Concierto("Smooth Criminal", "Michael Jackson", 3000, "Generado con IA.", "https://i.ytimg.com/vi/q8w1d01Y2vY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCJvi4Gui8sk4qURQdLiYPhuDu3uw", 200, true, false));
+        this.listaDeConciertos.push(new Concierto("Rock al Parque", "La Vela Puerca", 1500, "Festival de rock uruguayo.", "https://imgs.elpais.com.uy/dims4/default/89ee5ae/2147483647/strip/true/crop/970x667+15+0/resize/1440x990!/quality/90/?url=https%3A%2F%2Fel-pais-uruguay-production-web.s3.us-east-1.amazonaws.com%2Fbrightspot%2Fuploads%2F2018%2F01%2F17%2F5a5fc53dc4f64.jpeg", 100, true, true));
+        this.listaDeConciertos.push(new Concierto("Blues Session", "B.B. King", 2000, "Noche de blues.", "https://runrun.es/wp-content/uploads/2015/05/bb1.jpg", 50, true, true));
+        this.listaDeConciertos.push(new Concierto("Metal Fest", "Rata Blanca", 1800, "Metal argentino en vivo.", "https://www.cmtv.com.ar/imagenes_artistas/252.webp", 0, false, false));
+        this.listaDeConciertos.push(new Concierto("Pop Night", "Dua Lipa", 2500, "Show internacional de pop.", "https://www.hola.com/horizon/landscape/39e86606e8d5-img0437.jpg", 3, true, false));
 
 
         
