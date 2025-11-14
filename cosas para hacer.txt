@@ -1,8 +1,6 @@
 Ordenar en admin y code por funciones.
 por ejemplo todas las cargas de tablas juntas, y asi
 
-
-Agregar columna cliente en reservas pendientes. y cambiar imagen actual del documento
 sacar fondo a imagenes que corresponda 
 
 casos de prueba
@@ -10,7 +8,10 @@ cambiar documento analisis
 
 ver tema url imagen en conciertos
 
-leer letra y corroborar que tenga todo
-sacar console.log que estén mal
-agregar datos de prueba
 ordenar codigo clases, sistema, code y admin
+
+ver las funciones que paso id, pasar objeto si puedo
+
+ver estandar de documentación para hacerla parecida
+
+agregar id en panel superior para facilitar corrección

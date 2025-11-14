@@ -20,10 +20,10 @@
         <h1>Iniciar Sesión</h1>
         <form id="login">
             <label for="username">Usuario:
-                <input type="text" id="username" required value="joaco">
+                <input type="text" id="username" required value="joaquin">
 
                 <label for="password">Contraseña:
-                    <input type="password" id="password" required value="1234">
+                    <input type="password" id="password" required value="Admin123">
 
                     <button type="button" onclick="login()">Ingresar</button>
         </form>
@@ -67,9 +67,10 @@
                     <thead>
                         <th>ID</th>
                         <th>Fecha</th>
+                        <th>Cliente</th>
                         <th>Concierto</th>
                         <th>Cantidad Entradas</th>
-                        <th>Total a Pagar</th>
+                        <th>Total a Pagar(Sin Descuento)</th>
                         <th>Acción</th>
                     </thead>
                     <tbody id="adminReservasPendientesTBody">
@@ -83,9 +84,10 @@
                     <thead>
                         <th>ID</th>
                         <th>Fecha</th>
+                        <th>Cliente</th>
                         <th>Concierto</th>
                         <th>Cantidad Entradas</th>
-                        <th>Total a Pagar</th>
+                        <th>Total a Pagar(Con Descuento)</th>
                     </thead>
                     <tbody id="adminReservasAprobadasTBody">
 
@@ -99,6 +101,7 @@
                     <thead>
                         <th>ID</th>
                         <th>Fecha</th>
+                        <th>Cliente</th>
                         <th>Concierto</th>
                         <th>Cantidad Entradas</th>
                         <th>Total a Pagar</th>

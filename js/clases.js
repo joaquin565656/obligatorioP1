@@ -16,33 +16,83 @@ class Sistema {
 
     precargar(){
             
-        this.listaDeClientes.push(new Cliente("Joaquín", "Guerra", "joaco", "1234",20000))
-        this.listaDeClientes.push(new Cliente("123", "123", "jj", "1234",10000))
+         // --- CLIENTES ---
+    this.listaDeClientes.push(new Cliente("Ana", "Pérez", "anap", "Ana123", 10000));
+    this.listaDeClientes.push(new Cliente("Bruno", "García", "brunog", "Bru123", 10000));
+    this.listaDeClientes.push(new Cliente("Camila", "Rodríguez", "cami_r", "Cami123", 10000));
+    this.listaDeClientes.push(new Cliente("Diego", "Fernández", "diegof", "Diego123", 10000));
+    this.listaDeClientes.push(new Cliente("Elena", "López", "elena_l", "Elen123", 10000));
+    this.listaDeClientes.push(new Cliente("Federico", "Suárez", "fede_s", "Fede123", 10000));
+    this.listaDeClientes.push(new Cliente("Gabriela", "Torres", "gabi_t", "Gabi123", 10000));
+    this.listaDeClientes.push(new Cliente("Hernán", "Méndez", "hernanm", "Hern123", 10000));
+    this.listaDeClientes.push(new Cliente("Isabel", "Cruz", "isa_c", "Isa123", 10000));
+    this.listaDeClientes.push(new Cliente("Joaquín", "Díaz", "joaco_d", "Joaco123", 10000));
 
         
-        this.listaDeAdministradores.push(new Administrador("Joaquín","admin","1234"));
-        this.listaDeAdministradores.push(new Administrador("Prueba","administrador","admin123"));
+         // --- ADMINISTRADORES ---
+    this.listaDeAdministradores.push(new Administrador("Joaquín", "joaquin", "Admin123"));
+    this.listaDeAdministradores.push(new Administrador("Super", "superadmin", "Super123"));
+        
+    this.listaEstadosReserva.push(new EstadoReserva("Pendiente", true)); // id = 1
+    this.listaEstadosReserva.push(new EstadoReserva("Aprobada", true)); //id = 2
+    this.listaEstadosReserva.push(new EstadoReserva("Cancelada", true)); //id = 3
 
-        this.listaDeConciertos.push(new Concierto("Concierto de Michael Jackson","Michael Jackson",160000,'Smooth Criminal','./imagenes/ConciertoMichaelJackson.jpg',100,true,false));
-        this.listaDeConciertos.push(new Concierto("Concierto de Shakira","Shakira",6000,'Shakira en vivo','./imagenes/ConciertoShakira.jpg',100,true,false));
-        this.listaDeConciertos.push(new Concierto("Concierto de Metallica","Metallica",15000,'Metallica WorldWired Tour','./imagenes/ConciertoMetallica.png',100,true,true));
-        this.listaDeConciertos.push(new Concierto("Concierto de ACDC","ACDC",15000,'ACDC Gira','./imagenes/ConciertoACDC.png',100,false,true));
-        this.listaDeConciertos.push(new Concierto("Concierto de Bad Bunny","Bad Bunny",8000,'Bad Bunny Live','./imagenes/ConciertoBadBunny.png',100,false,false));
-        this.listaDeConciertos.push(new Concierto("Concierto de Taylor Swift","Taylor Swift",20000,'The Eras Tour','./imagenes/ConciertoTaylorSwift.png',100,true,true));
+        // --- CONCIERTOS ---
+        this.listaDeConciertos.push(new Concierto("Smooth Criminal", "Michael Jackson", 3000, "Generado con IA.", "./imagenes/ConciertoMichaelJackson.jpg", 200, true, false));
+        this.listaDeConciertos.push(new Concierto("Rock al Parque", "La Vela Puerca", 1500, "Festival de rock uruguayo.", "./imagenes/ConciertoLaVela.png", 100, true, true));
+        this.listaDeConciertos.push(new Concierto("Blues Session", "B.B. King", 2000, "Noche de blues.", "./imagenes/ConciertoBBKing.png", 50, true, true));
+        this.listaDeConciertos.push(new Concierto("Metal Fest", "Rata Blanca", 1800, "Metal argentino en vivo.", "./imagenes/ConciertoRataBlanca.jpg", 0, false, false));
+        this.listaDeConciertos.push(new Concierto("Pop Night", "Dua Lipa", 2500, "Show internacional de pop.", "./imagenes/ConciertoDuaLipa.png", 3, true, false));
 
-        this.listaEstadosReserva.push(new EstadoReserva("Pendiente", true));
-        this.listaEstadosReserva.push(new EstadoReserva("Aprobada", true));
-        this.listaEstadosReserva.push(new EstadoReserva("Cancelada", true));
 
         
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[0],4,8000,this.listaEstadosReserva[0],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[0],4,8000,this.listaEstadosReserva[0],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[1],4,14000,this.listaEstadosReserva[1],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[1],4,14000,this.listaEstadosReserva[0],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],6,16000,this.listaEstadosReserva[2],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],8,20000,this.listaEstadosReserva[1],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],10,18000,this.listaEstadosReserva[0],'07/11/2025'));
-        this.listaReservas.push(new Reserva(this.listaDeClientes[0],this.listaDeConciertos[4],20,20,this.listaEstadosReserva[0],'07/11/2025'));
+         // --- RESERVAS ---
+
+    // PENDIENTES 
+
+        // Michael Jackson: 3000 * 2 = 6000
+        this.listaReservas.push(new Reserva(this.listaDeClientes[0], this.listaDeConciertos[0], 2, 6000, this.listaEstadosReserva[0], "10/11/2025"));
+    
+        // B.B. King: 2000 * 5 = 10000 //Cuando la procese debería quedar total a pagar = 900
+        this.listaReservas.push(new Reserva(this.listaDeClientes[1], this.listaDeConciertos[2], 5, 10000, this.listaEstadosReserva[0], "10/11/2025"));
+    
+        // La Vela Puerca: 1500 * 10 = 15000 → -10% = 13500 (saldo insuficiente luego)
+        this.listaReservas.push(new Reserva(this.listaDeClientes[9], this.listaDeConciertos[1], 10, 15000, this.listaEstadosReserva[0], "10/11/2025"));
+  
+   // APROBADAS (se asume saldo y cupos ya descontados)
+   
+        // La Vela Puerca: 1500 * 4 =6000 - 10%  = 5400
+        this.listaReservas.push(new Reserva(this.listaDeClientes[2], this.listaDeConciertos[1], 4, 5400, this.listaEstadosReserva[1], "09/11/2025"));
+    
+        // Michael Jackson: 3000 * 3 = 9000 
+        this.listaReservas.push(new Reserva(this.listaDeClientes[3], this.listaDeConciertos[0], 3, 9000, this.listaEstadosReserva[1], "08/11/2025"));
+    
+        // Dua Lipa: 2500 * 1 = 2500
+        this.listaReservas.push(new Reserva(this.listaDeClientes[4], this.listaDeConciertos[4], 1, 2500, this.listaEstadosReserva[1], "08/11/2025"));
+
+ // CANCELADAS
+
+        // Rata Blanca (pausado): 1800 * 2 = 3600
+        this.listaReservas.push(new Reserva(this.listaDeClientes[5], this.listaDeConciertos[3], 2, 3600, this.listaEstadosReserva[2], "09/11/2025"));
+      
+        // Michael Jackson: 3000 * 10 = 30000 - 10% = 27.000 (saldo insuficiente hipotético)
+        this.listaReservas.push(new Reserva(this.listaDeClientes[6], this.listaDeConciertos[0], 10, 27000, this.listaEstadosReserva[2], "09/11/2025"));
+       
+        // Dua Lipa: 2500 * 3 = 7500 (supera cupo)
+        this.listaReservas.push(new Reserva(this.listaDeClientes[7], this.listaDeConciertos[4], 3, 7500, this.listaEstadosReserva[2], "09/11/2025"));
+       
+        // B.B. King: 2000 * 3 = 6000 (Saldo insuficiente para ese cliente)
+        this.listaReservas.push(new Reserva(this.listaDeClientes[2], this.listaDeConciertos[2], 3, 6000, this.listaEstadosReserva[2], "08/11/2025"));
+    
+        // Descontar cupos de las aprobadas
+    this.listaDeConciertos[1].cuposDisponibles -= 4;  // Camila
+    this.listaDeConciertos[0].cuposDisponibles -= 3;  // Diego
+    this.listaDeConciertos[4].cuposDisponibles -= 1;  // Elena
+
+    // Descontar saldo de los clientes con reservas aprobadas
+    this.listaDeClientes[2].saldo -= 5400;
+    this.listaDeClientes[3].saldo -= 9000;
+    this.listaDeClientes[4].saldo -= 2500;
     }
 
     cerrarSesion(){
@@ -87,7 +137,6 @@ class Sistema {
     guardarUsuarioLogueado(nombreUsuario){
         let usuario = this.obtenerUsuarioPorNombreUsuario(nombreUsuario);
         if(usuario == null){
-            console.log("Usuario no encontrado");
             return;
         }       
         this.usuarioLogueado = usuario;
@@ -110,7 +159,6 @@ class Sistema {
         let reservas = this.listaReservas
         for(let reserva of reservas){
             if(reserva.cliente == cliente){
-                console.log(reserva);
                 if(reserva.estado.id == 1)
                     pendientes++;
                 if(reserva.estado.id == 2)
@@ -163,9 +211,6 @@ class Sistema {
 
     cambiarEstadoConcierto(idConcierto,estado){
         let concierto = this.obtenerConciertoPorId(idConcierto);
-        console.log(concierto);
-        console.log(idConcierto);
-        console.log(estado);
         
         if(concierto == null){
             alert("No se encontró concierto");
@@ -179,11 +224,9 @@ class Sistema {
                 return false;
             }
             concierto.estado = true;
-            console.log(concierto);
             return true;
         }else{
             concierto.estado = false;
-            console.log(concierto);
             return true;
             
         }
@@ -192,13 +235,17 @@ class Sistema {
 
     editarConcierto(idConcierto,nombre,artista,precio,descripcion,imagen,cuposDisponibles,oferta){
         let conciertoEditar = null;
-        
         for(let concierto of this.listaDeConciertos){
             if(concierto.id == idConcierto){
                 conciertoEditar = concierto;
             }
         }
+        let estado = conciertoEditar.estado;
         
+        // Verifico si cupos disponibles pasa a 0 lo pongo en estado pausa
+        if(cuposDisponibles==0){
+            estado = false;
+        }
         if(conciertoEditar!=null){            
             conciertoEditar.nombre = nombre;
             conciertoEditar.artista = artista;
@@ -207,6 +254,7 @@ class Sistema {
             conciertoEditar.imagen = imagen;
             conciertoEditar.cuposDisponibles = cuposDisponibles;
             conciertoEditar.oferta = oferta;
+            conciertoEditar.estado = estado;
             return true;
 
             // Si no encuentra concierto
@@ -285,7 +333,8 @@ class Sistema {
 
     existeReservaClienteLogueado(concierto){
         for(let reserva of this.listaReservas){
-            if(reserva.cliente.id == this.usuarioLogueado.id && reserva.concierto.id == concierto.id){
+            if(reserva.cliente.id == this.usuarioLogueado.id && reserva.concierto.id == concierto.id){                
+                if(reserva.estado.id != this.ID_ESTADO_CANCELADA)
                 return true;
             }
         }
@@ -326,7 +375,6 @@ class Sistema {
     agruparReservasPorConcierto(){
         let reservas = sistema.obtenerReservasPorIdEstadoTodas(this.ID_ESTADO_APROBADA);
         let conciertos = this.obtenerListaConciertosTotales();
-        console.log(reservas);
         let listaAgrupada = [];
         for(let concierto of conciertos){
             let cantidadEntradas = 0;
@@ -341,7 +389,6 @@ class Sistema {
             if(cantidadEntradas > 0)
             listaAgrupada.push(new ResumenGanancias(concierto,cantidadEntradas,totalAPagar));
         }
-        console.log(listaAgrupada);
         return listaAgrupada;
     }
     obtenerTotalRecaudado(){
@@ -382,6 +429,11 @@ class Sistema {
 procesarReserva(idReserva){
 let reserva = this.obtenerReservaPorID(idReserva)
 
+// Descuento especial
+if(reserva.cantidadEntradas>=4){
+    reserva.totalAPagar = reserva.totalAPagar * 0.9; // paga el 90% porque se le descuenta un 10 por mas de 4 entradas
+}
+
 if(!this.disponeSaldo(reserva.cliente.id,reserva.totalAPagar)){
     this.cancelarReserva(idReserva); 
     alert("Se canceló la reserva por no tener saldo disponible");
@@ -401,10 +453,7 @@ if(!reserva.concierto.estado){
     return;
 }
 
-// Descuento especial
-if(reserva.cantidadEntradas>=4){
-    reserva.totalAPagar = reserva.totalAPagar * 0.9; // paga el 90% porque se le descuenta un 10 por mas de 4 entradas
-}
+
 // Apruebo reserva
 this.aprobarReserva(idReserva);
 // Descuento saldo
@@ -425,10 +474,7 @@ aprobarReserva(idReserva){
     reserva.estado = estadoAprobado;
 }
 
-validarConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,form){
-   if (!form.reportValidity()) {
-    return false;
-  }
+validarConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,editando){
 
 // Verifico para asegurarme que tenga datos
   if(nombre =="" || artista =="" || descripcion == "" || imagen =="" ){
@@ -449,10 +495,17 @@ validarConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,form)
     if(precio <=0){
         alert("Precio debe ser un número mayor a cero");
         return false;
-    }else if(cuposDisponibles <=0){
+    }    
+    if(cuposDisponibles <=0 && editando == false){
         alert("Cantidad de cupos debe ser un número mayor a cero");
         return false;
     }
+
+    if(cuposDisponibles <0 && editando == true){
+        alert("Cantidad de cupo no puede ser menor a 0");
+        return false;
+    }
+
     return true;
 }
 

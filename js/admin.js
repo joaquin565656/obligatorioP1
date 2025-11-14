@@ -55,6 +55,7 @@ function cargarTablaPorIdEstado(idEstado) {
         <tr>
             <td>${reserva.id}</td>
             <td>${reserva.fecha}</td>
+            <td>${ `${reserva.cliente.nombre} ${reserva.cliente.apellido} ` }</td>
             <td>${reserva.concierto.nombre}</td>
             <td>${reserva.cantidadEntradas}</td>
             <td>${reserva.totalAPagar}</td>
@@ -166,18 +167,9 @@ function crearConcierto() {
   let cuposDisponibles = Number(document.querySelector("#cuposDisponiblesConcierto").value);
   let oferta = document.querySelector("#chkOfertaConcierto").checked;
   let form = document.querySelector("#formCrearConcierto");
+  
 
-  if (
-    !sistema.validarConcierto(
-      nombre,
-      artista,
-      precio,
-      descripcion,
-      imagen,
-      cuposDisponibles,
-      form
-    )
-  ) {
+  if (!sistema.validarConcierto(nombre,artista,precio,descripcion,imagen,cuposDisponibles,idConciertoEditando!=null ? true : false)){
     return;
   }
 

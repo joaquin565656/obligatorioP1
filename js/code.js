@@ -22,8 +22,12 @@ function mostrarSeccion(idSeccion) {
 }
 
 function login() {
-  let username = document.getElementById("username").value;
-  let password = document.getElementById("password").value;
+  let form = document.querySelector("#login");
+    if (!form.reportValidity()) {
+    return;
+  }
+  let username = document.querySelector("#username").value;
+  let password = document.querySelector("#password").value;
 
   let usuario = sistema.existeUsuarioyContrasenia(username, password);
   if (usuario == 0) {
@@ -265,8 +269,7 @@ function confirmarReserva() {
   );
   iniciarCliente();
 
-  alert(
-    `✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`
-  );
+  alert(`✅ Reserva confirmada para ${cantidad} entrada(s) de "${conciertoSeleccionado.nombre}"`);
+  document.querySelector("#cantidadEntradas").value = 1;
   cerrarPopUpReserva();
 }
